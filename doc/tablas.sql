@@ -1,49 +1,83 @@
-
+CREATE TABLE Usuario (
+    id INTEGER PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    contrasena VARCHAR(100) NOT NULL,
+    telefono VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) NOT NULL,
+    tipo_usuario VARCHAR(100) NOT NULL
+);
 
 CREATE TABLE Pedido (
     id INTEGER PRIMARY KEY,
-    cliente VARCHAR(100) NOT NULL,
-    estado VARCHAR(100) NOT NULL,
+    fecha_reserva VARCHAR(100) NOT NULL,
+    hora_reserva VARCHAR(100) NOT NULL,
+    estado_pedido VARCHAR(100) NOT NULL,
+    precio_total INTEGER NOT NULL,
+    id_cliente INTEGER NOT NULL,
+    CONSTRAINT Pedido_id_usuario_PK FOREIGN KEY(id_usuario) REFERENCES Usuario(id)
 );
 
 CREATE TABLE OpcionEntrada (
     id INTEGER PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    precio INTEGER NOT NULL,
-    CONSTRAINT OpcionEntrada_nombre_UQ UNIQUE (nombre)
+    descripcion VARCHAR(100) NOT NULL,
+    imagen VARCHAR(100) NOT NULL,
+    precio INTEGER NOT NULL
 );
 
 CREATE TABLE OpcionPlatoFuerte (
     id INTEGER PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    precio INTEGER NOT NULL,
-    CONSTRAINT OpcionPlatoFuerte_nombre_UQ UNIQUE (nombre)
+    descripcion VARCHAR(100) NOT NULL,
+    imagen VARCHAR(100) NOT NULL,
+    precio INTEGER NOT NULL
 );
 
 CREATE TABLE OpcionPostre (
     id INTEGER PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    precio INTEGER NOT NULL,
-    CONSTRAINT OpcionPostre_nombre_UQ UNIQUE (nombre)
+    descripcion VARCHAR(100) NOT NULL,
+    imagen VARCHAR(100) NOT NULL,
+    precio INTEGER NOT NULL
 );
 
 CREATE TABLE OpcionBebida (
     id INTEGER PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    precio INTEGER NOT NULL,
-    CONSTRAINT OpcionBebida_nombre_UQ UNIQUE (nombre)
+    descripcion VARCHAR(100) NOT NULL,
+    imagen VARCHAR(100) NOT NULL,
+    precio INTEGER NOT NULL
 );
 
-CREATE TABLE Menu(
-    id_pedido INTEGER PRIMARY KEY,
-    precio_total INTEGER, 
+CREATE TABLE SeleccionEntrada(
+    id_pedido INTEGER,
     id_entrada INTEGER,
-    id_plato_fuerte INTEGER,
-    id_postre INTEGER,
-    id_bebida INTEGER,
-    CONSTRAINT Menu_id_pedido_PK FOREIGN KEY(id_pedido) REFERENCES Pedido(id),
-    CONSTRAINT Menu_id_entrada_pedido_PK FOREIGN KEY(id_entrada) REFERENCES OpcionEntrada(id),
-    CONSTRAINT Menu_id_plato_fuerte_pedido_PK FOREIGN KEY(id_plato_fuerte) REFERENCES OpcionPlatoFuerte(id),
-    CONSTRAINT Menu_id_postre_pedido_PK FOREIGN KEY(id_postre) REFERENCES OpcionPostre(id),
-    CONSTRAINT Menu_id_bebida_pedido_PK FOREIGN KEY(id_bebida) REFERENCES OpcionBebida(id),
+    CONSTRAINT SeleccionEntrada_PK PRIMARY KEY(id_pedido, id_entrada),
+    CONSTRAINT SeleccionEntrada_Pedido_FK FOREIGN KEY (id_pedido) REFERENCES Pedido(id),
+    CONSTRAINT SeleccionEntrada_Entrada_FK FOREIGN KEY (id_entrada) REFERENCES OpcionEntrada(id)
 );
+
+CREATE TABLE SeleccionPlatoFuerte(
+    id_pedido INTEGER,
+    id_plato_fuerte INTEGER,
+    CONSTRAINT SeleccionPlatoFuerte_PK PRIMARY KEY(id_pedido, id_plato_fuerte),
+    CONSTRAINT SeleccionPlatoFuerte_Pedido_FK FOREIGN KEY (id_pedido) REFERENCES Pedido(id),
+    CONSTRAINT SeleccionPlatoFuerte_PlatoFuerte_FK FOREIGN KEY (id_plato_fuerte) REFERENCES OpcionPlatoFuerte(id)
+);
+
+CREATE TABLE SeleccionPostre(
+    id_pedido INTEGER,
+    id_postre INTEGER,
+    CONSTRAINT SeleccionPostre_PK PRIMARY KEY(id_pedido, id_postre),
+    CONSTRAINT SeleccionPostre_Pedido_FK FOREIGN KEY (id_pedido) REFERENCES Pedido(id),
+    CONSTRAINT SeleccionPostre_Postre_FK FOREIGN KEY (id_postre) REFERENCES OpcionPostre(id)
+);
+
+CREATE TABLE SeleccionBebida(
+    id_pedido INTEGER,
+    id_bebida INTEGER,
+    CONSTRAINT SeleccionBebida_PK PRIMARY KEY(id_pedido, id_bebida),
+    CONSTRAINT SeleccionBebida_Pedido_FK FOREIGN KEY (id_pedido) REFERENCES Pedido(id),
+    CONSTRAINT SeleccionBebida_Bebida_FK FOREIGN KEY (id_bebida) REFERENCES OpcionBebida(id)
+);
+
