@@ -10,4 +10,20 @@ public class controlador {
     public String inicio(){
         return "index";
     }
+    @GetMapping("/entradas")
+    public String menuEntradas(){
+        return "entradas";
+    }
+    @GetMapping("/platos_fuertes")
+    public String menuPlatosFuertes(){
+        return "platos_fuertes";
+    }
+    @GetMapping("/postres")
+    public String menuPostres(){
+        return "postres";
+    }
+    @GetMapping("/bebidas")
+    public String menuBebidas(){
+        return "bebidas";
+    }
 }
