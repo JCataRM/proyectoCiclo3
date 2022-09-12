@@ -1,0 +1,90 @@
+@startuml "Diagrama Relacional"
+
+Entity Usuario {
+    id: Integer <<PK>>
+    --
+    nombre: varchar(100) <<NN>>
+    contraseña: varchar(100) <<NN>>
+    telefono: Integer <<NN>>
+    correo: varchar(100) <<NN>>
+    tipo_usuario: varchar(100) <<NN>>
+}
+
+Entity Pedido {
+    id: Integer <<PK>>
+    --
+    fecha_reserva: varchar(100) <<NN>>
+    hora_reserva: varchar(100) <<NN>>
+    estado_pedido: varchar(100) <<NN>>
+    precio_total: Integer <<NN>>
+    --
+    id_cliente: Integer <<FK>>
+}
+
+Entity SeleccionEntrada{
+    id_entrada: Integer <<PK>> <<FK>>
+    id_pedido: Integer <<PK>> <<FK>>
+}
+
+Entity OpcionEntrada{
+    id: Integer <<PK>>
+    --
+    nombre varchar(100) <<NN>>
+    descripcion: varchar(100) <<NN>>
+    imagen: varchar(100) <<NN>>
+    precio: Integer <<NN>>
+}
+
+Entity SeleccionPlatoFuerte{
+    id_plato_fuerte: Integer <<PK>> <<FK>>
+    id_pedido: Integer <<PK>> <<FK>>
+}
+
+Entity OpcionPlatoFuerte{
+    id: Integer <<PK>>
+    --
+    nombre varchar(100) <<NN>>
+    descripcion: varchar(100) <<NN>>
+    imagen: varchar(100) <<NN>>
+    precio: Integer <<NN>>
+}
+
+Entity SeleccionPostre{
+    id_postre: Integer <<PK>> <<FK>>
+    id_pedido: Integer <<PK>> <<FK>>
+}
+
+Entity OpcionPostre{
+    id: Integer <<PK>>
+    --
+    nombre varchar(100) <<NN>>
+    descripcion: varchar(100) <<NN>>
+    imagen: varchar(100) <<NN>>
+    precio: Integer <<NN>>
+}
+
+Entity SeleccionBebida{
+    id_bebida: Integer <<PK>> <<FK>>
+    id_pedido: Integer <<PK>> <<FK>>
+}
+
+Entity OpcionBebida{
+    id: Integer <<PK>>
+    --
+    nombre varchar(100) <<NN>>
+    descripcion: varchar(100) <<NN>>
+    imagen: varchar(100) <<NN>>
+    precio: Integer <<NN>>
+}
+
+Pedido }|-left-|| Usuario
+SeleccionEntrada }|--|| Pedido
+SeleccionEntrada }|-up-o| OpcionEntrada
+SeleccionPlatoFuerte }|--|| Pedido
+SeleccionPlatoFuerte }|-up-|| OpcionPlatoFuerte
+SeleccionPostre }|--|| Pedido
+SeleccionPostre }|-up-o| OpcionPostre
+SeleccionBebida }|--|| Pedido
+SeleccionBebida }|-up-o| OpcionBebida
+
+@enduml

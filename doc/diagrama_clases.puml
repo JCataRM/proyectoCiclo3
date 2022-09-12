@@ -1,0 +1,53 @@
+@startuml "Diagrama de Clases"
+
+class Pedido {
+    - Integer id
+    - String fechaReserva
+    - String horaReserva
+    - EstadoPedido estadoPedido
+    - Integer precioTotal 
+    --
+    + Integer calcularValorPedido()
+}
+class OpcionEntrada{
+    - Integer id
+    - String nombre
+    - String descripcion
+    - String imagen
+    - Integer precio
+}
+class OpcionPlatoFuerte{
+    - Integer id
+    - String nombre
+    - String descripcion
+    - String imagen
+    - Integer precio
+}
+class OpcionPostre{
+    - Integer id
+    - String nombre
+    - String descripcion
+    - String imagen
+    - Integer precio
+}
+class OpcionBebida{
+    - Integer id
+    - String nombre
+    - String descripcion
+    - String imagen
+    - Integer precio
+}
+
+enum EstadoPedido{
+    SIN_ENTREGAR
+    ENTREGADO
+}
+
+
+Pedido "*" -- "0..1" OpcionEntrada
+Pedido "*" -- "0..1" OpcionPlatoFuerte
+Pedido "*" -- "0..1" OpcionPostre
+Pedido "*" -- "0..1" OpcionBebida
+Pedido .left.> EstadoPedido
+
+@enduml
