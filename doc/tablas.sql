@@ -13,7 +13,7 @@ CREATE TABLE Pedido (
     hora_reserva VARCHAR(100) NOT NULL,
     estado_pedido VARCHAR(100) NOT NULL,
     precio_total INTEGER NOT NULL,
-    id_cliente INTEGER NOT NULL,
+    id_usuario INTEGER NOT NULL,
     CONSTRAINT Pedido_id_usuario_PK FOREIGN KEY(id_usuario) REFERENCES Usuario(id)
 );
 
