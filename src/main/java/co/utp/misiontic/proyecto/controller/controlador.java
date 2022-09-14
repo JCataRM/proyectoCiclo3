@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import co.utp.misiontic.proyecto.dto.PedidoDto;
 import co.utp.misiontic.proyecto.dto.UsuarioDto;
 import co.utp.misiontic.proyecto.service.*;
 
@@ -61,6 +62,7 @@ public class controlador {
 
         return "bebidas";
     }
+    
     @GetMapping("/#section3")
     public String menu(){
         return "/#section3";
@@ -71,7 +73,11 @@ public class controlador {
         return "/form_registration";
     }
 
-    //---------------------Registro de un usuario---------------------
+    
+
+
+
+    //---------------------Cuenta del usuario---------------------
 
     @GetMapping("/registro")
     public String registroUsuario(@RequestParam("cedula") Integer cedula,
@@ -97,12 +103,39 @@ public class controlador {
         
             usuarioServicio.guardarUsuario(usuario);
         } 
-        // Si el usuario existe se le muestra un mensaje de que ya está logeado
+        // Si el usuario existe se le muestra un mensaje de que ya tiene una cuenta
         else {
-            modelo.addAttribute("mensaje", "El usuario ya tiene una cuenta vinculada");
+            modelo.addAttribute("mensaje", "El usuario ya tiene una cuenta vinculada con ese número de cédula");
             return "form_registration";
         }  
 
+        return "index";
+    }
+
+    @GetMapping("/inicio_sesion")
+    public String ingresoSesion(@RequestParam("cedula") Integer cedula,
+        @RequestParam("contrasena") String contrasena,
+        Model modelo
+        ){
+        
+        //Verifico si el usuario existe
+        var usuario = usuarioServicio.encontrarUsuario(cedula);
+        
+        //Si el usuario no existe, se procede a crearlo en la base de datos
+        if (usuario.isEmpty()) {
+            modelo.addAttribute("mensaje", "El usuario no tiene una cuenta vinculada a este número de cédula. Lo invitamos a crearla.");
+            return "form_registration";
+        } 
+        // Si el usuario existe se le muestra un mensaje de que ya tiene una cuenta
+        else {
+            modelo.addAttribute("nombre", usuario.get().getNombre());
+            var pedido = new PedidoDto();
+        }  
+
+        return "index";
+    }
+    @GetMapping("/cerrar_sesion")
+    public String cerrarSesion(){
         return "index";
     }
 }
