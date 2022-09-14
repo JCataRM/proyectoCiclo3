@@ -2,23 +2,23 @@ package co.utp.misiontic.proyecto.dto;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.print.DocFlavor.STRING;
 
-import co.utp.misiontic.proyecto.model.TipoUsuario;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "usuario")
 public class UsuarioDto implements Serializable{
 
     @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
-
     private String nombre;
     private String contrasena;
-    private Integer telefono;
+    private String telefono;
     private String correo;
-    private TipoUsuario tipoUsuario;
+    private String tipoUsuario;
 
 }
