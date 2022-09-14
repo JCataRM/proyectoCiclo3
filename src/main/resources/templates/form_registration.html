@@ -24,24 +24,28 @@
     <h1>FORMULARIO DE REGISTRO</h1>
     <section id="registration_form">
         <div class="container">
+            <!--Visualización si ya tiene cuenta-->
+            <div th:if="${mensaje != null}" >
+                <div th:text="${mensaje}" class="alert alert-warning text-dark" role="alert">
+                    Mensaje
+                </div>
+            </div>
+            
             <div class="row" style="justify-content: center;">
-                <form class="col-8">
-                    <label for="identification" class="form-label">Cedula de ciudadanía</label>
-                    <input type="email" class="form-control" id="identification" aria-describedby="emailHelp">
-                    <label for="names" class="form-label">Nombre completo</label>
-                    <input type="email" class="form-control" id="names" aria-describedby="emailHelp">
-                    <label for="lastName" class="form-label">Celular</label>
-                    <input type="email" class="form-control" id="lastName" aria-describedby="emailHelp">
+                <form class="col-8" method="get" action="/registro">
+                    <label for="cedula" class="form-label">Cedula de ciudadanía</label>
+                    <input name="cedula" type="number" class="form-control" id="cedula" aria-describedby="emailHelp" required>
+                    <label for="nombre" class="form-label">Nombre completo</label>
+                    <input name="nombre" type="text" class="form-control" id="nombre" aria-describedby="emailHelp" required>
+                    <label for="telefono" class="form-label">Celular</label>
+                    <input name="telefono" type="text" class="form-control" id="telefono" aria-describedby="emailHelp" required>
                     <label for="correo" class="form-label">Correo electrónico</label>
-                    <input name="correo" type="email" class="form-control" id="correo" aria-describedby="emailHelp">
-                    <label for="inputPassword5" class="form-label">Password</label>
-                    <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-                    <div id="passwordHelpBlock" class="form-text">
-                    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-                    </div>
+                    <input name="correo" type="email" class="form-control" id="correo" aria-describedby="emailHelp" required>
+                    <label for="contrasena" class="form-label">Contraseña</label>
+                    <input name="contrasena" type="password" id="contrasena" class="form-control" aria-describedby="passwordHelpBlock" required>
                     <div class="registration_buttons">
                         <button type="submit" class="btn btn-primary">Registrarme</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.href='../index.html#section1'">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.href='../#section1'">Cerrar</button>
                     </div>
                 </form>
             </div>

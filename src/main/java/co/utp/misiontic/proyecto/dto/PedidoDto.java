@@ -6,11 +6,14 @@ import java.util.List;
 import javax.persistence.*;
 
 import co.utp.misiontic.proyecto.model.EstadoPedido;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+
+import lombok.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "pedido")
 public class PedidoDto implements Serializable{
 
     @Id 
@@ -23,10 +26,10 @@ public class PedidoDto implements Serializable{
     private Integer precio_total;
     private UsuarioDto usuario;
 
-    private List<OpcionEntradaDto> entradas;
-    private List<OpcionPlatoFuerteDto> platosFuertes;
-    private List<OpcionPostreDto> postres;
-    private List<OpcionBebidaDto> bebidas;
+    //private List<OpcionEntradaDto> entradas;
+    //private List<OpcionPlatoFuerteDto> platosFuertes;
+    //private List<OpcionPostreDto> postres;
+    //private List<OpcionBebidaDto> bebidas;
     
 
 }
