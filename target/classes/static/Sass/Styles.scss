@@ -29,6 +29,60 @@
     }
 }
 
+//Modal sign-in
+#exampleModal {
+    .modal-dialog {
+        .modal-content {
+            .modal-body {
+                form {
+                    div {
+                        p {
+                            #registration {
+                                cursor: pointer;
+                                color: orange;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//Registration form
+#body_form {
+    background-image: url(../Backgrounds/backgroundStarter.jpg);
+    position: relative;
+    &::before {
+        content: '';
+        position: absolute;
+        background-color: rgba(0,0,0,0.5);
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+    h1 {
+        text-align: center;
+        padding: 3%;
+        color: white;
+        z-index: 1;
+    }
+    form {
+        z-index: 1;
+        label {
+            color: white;
+        }
+        .form-text {
+            color: orange;
+        }
+        .registration_buttons {
+            padding: 3% 0;
+        }
+    }
+}
+
 //Section 1
 #section1 {
     background-image: url("../Backgrounds/imagenes/imagenes/platter-2009590_1920.jpg");
