@@ -43,11 +43,17 @@ enum EstadoPedido{
     ENTREGADO
 }
 
+enum TipoUsuario{
+    CLIENTE
+    ADMINISTRADOR
+}
+
 
 Pedido "*" -- "0..1" OpcionEntrada
 Pedido "*" -- "0..1" OpcionPlatoFuerte
 Pedido "*" -- "0..1" OpcionPostre
 Pedido "*" -- "0..1" OpcionBebida
 Pedido .left.> EstadoPedido
+Pedido .right.> TipoUsuario
 
 @enduml

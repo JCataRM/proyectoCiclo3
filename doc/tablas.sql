@@ -1,3 +1,5 @@
+-----------------------------------Creación de tablas---------------------------------
+
 CREATE TABLE Usuario (
     id INTEGER PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -13,7 +15,7 @@ CREATE TABLE Pedido (
     hora_reserva VARCHAR(100) NOT NULL,
     estado_pedido VARCHAR(100) NOT NULL,
     precio_total INTEGER NOT NULL,
-    id_cliente INTEGER NOT NULL,
+    id_usuario INTEGER NOT NULL,
     CONSTRAINT Pedido_id_usuario_PK FOREIGN KEY(id_usuario) REFERENCES Usuario(id)
 );
 
@@ -80,4 +82,9 @@ CREATE TABLE SeleccionBebida(
     CONSTRAINT SeleccionBebida_Pedido_FK FOREIGN KEY (id_pedido) REFERENCES Pedido(id),
     CONSTRAINT SeleccionBebida_Bebida_FK FOREIGN KEY (id_bebida) REFERENCES OpcionBebida(id)
 );
+
+-----------------------------------Insertar información a las tablas---------------------------------
+
+INSERT INTO OpcionEntrada (id, nombre, descripcion, imagen, precio)
+    VALUES(1, 'Pan de higos', '2 porciones de pan artesanal recubierto con higos, queso mozzarella y queso crema.', '/images/entrada1.jpg', 12000);
 

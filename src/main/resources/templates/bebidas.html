@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,74 +25,22 @@
         <h1>BEBIDAS</h1>
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div th:each="bebida: ${bebidas}" class="col-12">
                     <article class="menu_starter">
                         <div class="col-md-3">
-                            <img src="../Backgrounds/imagenes/imagenes/bebida1.jpg"/>
+                            <img th:src="${bebida.imagen}"/>
                         </div>
                         <div class="col-md-9">
-                            <h3>Vino tinto</h3>
-                            <p>Una copa de vino tinto de la mejor selección de vinos.</p>
-                            <p class="cost">Costo: $12.000</p>
+                            <h3 th:text="${bebida.nombre}"></h3>
+                            <p th:text="${bebida.descripcion}"></p>
+                            <p class="cost" th:text="'Costo: $' + ${bebida.precio}"></p>
                             <button>Añadir al carrito</button>
                         </div>
                     </article>
-                </div>
-                <div class="col-12">
-                    <article class="menu_starter">
-                        <div class="col-md-3">
-                            <img src="../Backgrounds/imagenes/imagenes/Bebida-de-cereza-y-limón.jpg"/>
-                        </div>
-                        <div class="col-md-9">
-                            <h3>Bebida de limón y cereza.</h3>
-                            <p>Un vaso de 350 ml de limonada cerezada.</p>
-                            <p class="cost">Costo: $10.000</p>
-                            <button>Añadir al carrito</button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-12">    
-                    <article class="menu_starter">
-                        <div class="col-md-3">
-                            <img src="../Backgrounds/imagenes/imagenes/shake.jpg"/>
-                        </div>
-                        <div class="col-md-9">
-                            <h3>Malteada de fresa, vainilla, chocolate, macadamia</h3>
-                            <p>Leche de soja, almendras, deslactosada o entera, con helado de su elección, cubierta de chantilly, toppings y salsa de chocolota, mora o arequipe.</p>
-                            <p class="cost">Costo: $11.400</p>
-                            <button>Añadir al carrito</button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-12">    
-                    <article class="menu_starter">
-                        <div class="col-md-3">
-                            <img src="../Backgrounds/imagenes/imagenes/drink-1487304_640.jpg"/>
-                        </div>
-                        <div class="col-md-9">
-                            <h3>Limonada de la casa</h3>
-                            <p>Limonada con hielo, leche condensada y hojas de menta.</p>
-                            <p class="cost">Costo: $10.000</p>
-                            <button>Añadir al carrito</button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-12">    
-                    <article class="menu_starter">
-                        <div class="col-md-3">
-                            <img src="../Backgrounds/imagenes/imagenes/coke.jpg"/>
-                        </div>
-                        <div class="col-md-9">
-                            <h3>Soda</h3>
-                            <p>Coca-cola fría o al clima para acompañar sus platos.</p>
-                            <p class="cost">Costo: $5.500</p>
-                            <button>Añadir al carrito</button>
-                        </div>
-                    </article>
-                </div>    
+                </div>   
             </div>
         </div>
     </section>
-    <button onclick="location.href='../index.html#section3'" id="come_back" type="button" class="btn btn-dark" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Regresar</button>
+    <button onclick="location.href='/#section3'" id="come_back" type="button" class="btn btn-dark" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Regresar</button>
 </body>
 </html>
