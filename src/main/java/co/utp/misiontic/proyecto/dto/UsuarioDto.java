@@ -3,12 +3,13 @@ package co.utp.misiontic.proyecto.dto;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import co.utp.misiontic.proyecto.model.TipoUsuario;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "usuario")
 public class UsuarioDto implements Serializable{
 
     @Id 
@@ -19,6 +20,6 @@ public class UsuarioDto implements Serializable{
     private String contrasena;
     private Integer telefono;
     private String correo;
-    private TipoUsuario tipoUsuario;
+    private String tipoUsuario;
 
 }
