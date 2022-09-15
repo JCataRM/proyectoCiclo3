@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.utp.misiontic.proyecto.dto.UsuarioDto;
+import co.utp.misiontic.proyecto.model.entity.Usuario;
 import co.utp.misiontic.proyecto.repository.UsuarioRepositorio;
 
 @Service
@@ -14,11 +14,11 @@ public class UsuarioServicio {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
-    public void guardarUsuario(UsuarioDto usuario){
+    public void guardarUsuario(Usuario usuario){
         usuarioRepositorio.save(usuario);
     }
 
-    public Optional<UsuarioDto> encontrarUsuario(Integer id){
+    public Optional<Usuario> obtenerUsuario(Integer id){
         return usuarioRepositorio.findById(id);
     }
 }

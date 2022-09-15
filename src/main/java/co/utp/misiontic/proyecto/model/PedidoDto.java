@@ -1,19 +1,17 @@
-package co.utp.misiontic.proyecto.dto;
+package co.utp.misiontic.proyecto.model;
 
 import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
 
-import co.utp.misiontic.proyecto.model.EstadoPedido;
-
+import co.utp.misiontic.proyecto.model.entity.*;
 import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "pedido")
+
 public class PedidoDto implements Serializable{
 
     @Id 
@@ -24,12 +22,10 @@ public class PedidoDto implements Serializable{
     private String hora_reserva;
     private EstadoPedido EstadoPedido;
     private Integer precio_total;
-    private UsuarioDto usuario;
-
-    //private List<OpcionEntradaDto> entradas;
-    //private List<OpcionPlatoFuerteDto> platosFuertes;
-    //private List<OpcionPostreDto> postres;
-    //private List<OpcionBebidaDto> bebidas;
-    
+    private Usuario usuario;
+    private List<OpcionEntrada> entradas;
+    private List<OpcionPlatoFuerte> platosFuertes;
+    private List<OpcionPostre> postres;
+    private List<OpcionBebida> bebidas;
 
 }

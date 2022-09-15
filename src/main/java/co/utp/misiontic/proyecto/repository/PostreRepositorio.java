@@ -2,8 +2,8 @@ package co.utp.misiontic.proyecto.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import co.utp.misiontic.proyecto.dto.OpcionPostreDto;
+import co.utp.misiontic.proyecto.model.entity.OpcionPostre;
 
-public interface PostreRepositorio extends JpaRepository<OpcionPostreDto, Integer>{
+public interface PostreRepositorio extends JpaRepository<OpcionPostre, Integer>{
     
 }

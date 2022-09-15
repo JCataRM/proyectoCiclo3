@@ -5,16 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.utp.misiontic.proyecto.dto.OpcionPostreDto;
+import co.utp.misiontic.proyecto.model.entity.OpcionPostre;
+import org.springframework.data.domain.Sort;
 import co.utp.misiontic.proyecto.repository.PostreRepositorio;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class PostreServicio {
 
     @Autowired
     private PostreRepositorio postreRepositorio;
 
-    public List<OpcionPostreDto> listarPostres() {
-        return postreRepositorio.findAll();
+    public List<OpcionPostre> listarPostres() {
+        return postreRepositorio.findAll(Sort.by("nombre"));
     }
 }

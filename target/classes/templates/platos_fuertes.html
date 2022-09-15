@@ -25,15 +25,15 @@
         <h1>PLATOS FUERTES</h1>
         <div class="container">
             <div class="row">
-                <div th:each="platofuerte: ${platosfuertes}" class="col-12">
+                <div th:each="platoFuerte: ${platosFuertes}" class="col-12">
                     <article class="menu_starter">
                         <div class="col-md-3">
-                            <img th:src="${platofuerte.imagen}"/>
+                            <img th:src="${platoFuerte.imagen}"/>
                         </div>
                         <div class="col-md-9">
-                            <h3 th:text="${platofuerte.nombre}"></h3>
-                            <p th:text="${platofuerte.descripcion}"></p>
-                            <p class="cost" th:text="'Costo: $' + ${platofuerte.precio}"></p>
+                            <h3 th:text="${platoFuerte.nombre}"></h3>
+                            <p th:text="${platoFuerte.descripcion}"></p>
+                            <p class="cost" th:text="'Costo: $' + ${platoFuerte.precio}"></p>
                             <button>Añadir al carrito</button>
                         </div>
                     </article>

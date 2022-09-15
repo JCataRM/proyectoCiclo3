@@ -1,17 +1,15 @@
-package co.utp.misiontic.proyecto.dto;
+package co.utp.misiontic.proyecto.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.print.DocFlavor.STRING;
 
 import lombok.*;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "usuario")
-public class UsuarioDto implements Serializable{
+public class Usuario implements Serializable{
 
     @Id 
     private Integer Id;
@@ -20,5 +18,8 @@ public class UsuarioDto implements Serializable{
     private String telefono;
     private String correo;
     private String tipoUsuario;
+    
+    public Usuario() {
+    }
 
 }

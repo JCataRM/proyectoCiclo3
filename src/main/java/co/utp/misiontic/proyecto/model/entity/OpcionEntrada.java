@@ -1,6 +1,8 @@
-package co.utp.misiontic.proyecto.dto;
+package co.utp.misiontic.proyecto.model.entity;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 import lombok.*;
@@ -9,16 +11,19 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "opcionbebida")
-public class OpcionBebidaDto implements Serializable{
+@Table(name = "opcion_entrada")
+public class OpcionEntrada implements Serializable{
     
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
     private String nombre;
     private String descripcion;
     private String imagen;
     private Integer precio;
+
+    @ManyToMany(mappedBy = "entradas")
+    private List<Pedido> pedidos;
 
 }

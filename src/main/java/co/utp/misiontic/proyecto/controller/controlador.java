@@ -3,37 +3,45 @@ package co.utp.misiontic.proyecto.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import co.utp.misiontic.proyecto.dto.PedidoDto;
-import co.utp.misiontic.proyecto.dto.UsuarioDto;
+import co.utp.misiontic.proyecto.model.entity.*;
 import co.utp.misiontic.proyecto.service.*;
-
 
 @Controller
 public class controlador {
 
-    private EntradaServicio entradaServicio;
-    private BebidaServicio bebidaServicio;
-    private PostreServicio postreServicio;
-    private PlatoFuerteServicio platoFuerteServicio;
-    private UsuarioServicio usuarioServicio;
-    private PedidoServicio pedidoServicio;
+    private final EntradaServicio entradaServicio;
+    private final BebidaServicio bebidaServicio;
+    private final PostreServicio postreServicio;
+    private final PlatoFuerteServicio platoFuerteServicio;
+    private final UsuarioServicio usuarioServicio;
+    private final PedidoServicio pedidoServicio;
+
+    private Pedido pedidoActual;
+    private Usuario usuarioActual;
 
     public controlador(EntradaServicio entradaServicio, BebidaServicio bebidaServicio, PostreServicio postreServicio,
-        PlatoFuerteServicio platoFuerteServicio, UsuarioServicio usuarioServicio, PedidoServicio pedidoServicio) {
+            PlatoFuerteServicio platoFuerteServicio, UsuarioServicio usuarioServicio, PedidoServicio pedidoServicio
+            ) {
         this.entradaServicio = entradaServicio;
         this.bebidaServicio = bebidaServicio;
         this.postreServicio = postreServicio;
         this.platoFuerteServicio = platoFuerteServicio;
         this.usuarioServicio = usuarioServicio;
         this.pedidoServicio = pedidoServicio;
-    }
+        this.pedidoActual = new Pedido();
+        this.usuarioActual = new Usuario();
 
-    //------------------Conexión de páginas web------------------
+    }
+    
+    
+//------------------Conexión de páginas web------------------
 
     @GetMapping("/")
-    public String inicio(){
+    public String inicio(Model modelo){
+        
         return "index";
     }
     @GetMapping("/entradas")
@@ -74,10 +82,7 @@ public class controlador {
     }
 
     
-
-
-
-    //---------------------Cuenta del usuario---------------------
+//---------------------Cuenta del usuario---------------------
 
     @GetMapping("/registro")
     public String registroUsuario(@RequestParam("cedula") Integer cedula,
@@ -89,11 +94,11 @@ public class controlador {
         ){
         
         //Verifico si el usuario existe
-        var usuarioop = usuarioServicio.encontrarUsuario(cedula);
+        var usuarioop = usuarioServicio.obtenerUsuario(cedula);
         
         //Si el usuario no existe, se procede a crearlo en la base de datos
         if (usuarioop.isEmpty()) {
-            var usuario = new UsuarioDto();
+            var usuario = new Usuario();
             usuario.setId(cedula);
             usuario.setNombre(nombre);
             usuario.setTelefono(telefono);
@@ -119,7 +124,7 @@ public class controlador {
         ){
         
         //Verifico si el usuario existe
-        var usuario = usuarioServicio.encontrarUsuario(cedula);
+        var usuario = usuarioServicio.obtenerUsuario(cedula);
         
         //Si el usuario no existe, se procede a crearlo en la base de datos
         if (usuario.isEmpty()) {
@@ -129,8 +134,7 @@ public class controlador {
         // Si el usuario existe se le muestra un mensaje de que ya tiene una cuenta
         else {
             modelo.addAttribute("nombre", usuario.get().getNombre());
-            var pedido = new PedidoDto();
-        }  
+        }
 
         return "index";
     }
@@ -138,4 +142,22 @@ public class controlador {
     public String cerrarSesion(){
         return "index";
     }
+
+//---------------------Carrito de compras---------------------
+
+    @GetMapping("/entradas/{id}")
+    public String agregarAlCarritoEntrada(@PathVariable("id") Integer id,  Model modelo){
+        
+        var entrada = this.entradaServicio.obtenerEntrada(id);
+        if (!entrada.isEmpty()) {
+            this.pedidoActual.getEntradas().add(entrada.get());
+            modelo.addAttribute("mensaje", "La entrada se agregó exitosamente al carrito");
+        } 
+        menuEntradas(modelo);
+        
+        return "entradas";
+    }   
+
 }
+
+
