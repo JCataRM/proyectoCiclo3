@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurante Magic</title>
     <!--Icon tab-->
-    <link rel="shortcut icon" href="Backgrounds/hat-wizard-solid.svg" />
+    <link rel="shortcut icon" href="../static/Backgrounds/hat-wizard-solid.svg" />
     <!--Files css bootstrap-->
-    <link rel="stylesheet" href="Bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="Bootstrap/bootstrap.css.map">
-    <link rel="stylesheet" href="Bootstrap/bootstrap-grid.css.map">
-    <link rel="stylesheet" href="Bootstrap/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="Bootstrap/bootstrap-reboot.rtl.min.css">
-    <link rel="stylesheet" href="Bootstrap/bootstrap-reboot.rtl.min.css.map">
+    <link rel="stylesheet" href="../static/Bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/Bootstrap/bootstrap.css.map">
+    <link rel="stylesheet" href="../static/Bootstrap/bootstrap-grid.css.map">
+    <link rel="stylesheet" href="../static/Bootstrap/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../static/Bootstrap/bootstrap-reboot.rtl.min.css">
+    <link rel="stylesheet" href="../static/Bootstrap/bootstrap-reboot.rtl.min.css.map">
 
     <!--File css styles-->
-    <link rel="stylesheet" href="Sass/Styles.css">
+    <link rel="stylesheet" href="../static/Sass/Styles.css">
 
     <!--Files js bootstrap-->
-    <script defer src="Bootstrap/bootstrap.bundle.min.js"></script>
-    <script defer src="Bootstrap/bootstrap.bundle.js.map"></script>
+    <script defer src="../static/Bootstrap/bootstrap.bundle.min.js"></script>
+    <script defer src="../static/Bootstrap/bootstrap.bundle.js.map"></script>
 
     <!--File js icons-->
     <script defer src="https://kit.fontawesome.com/f030a86100.js" crossorigin="anonymous"></script>
@@ -56,7 +56,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form method="get" action="/inicio_sesion">
+            <form method="post" action="/inicio_sesion">
               <div class="mb-3">
                 <label for="cedula" class="form-label">Cédula</label>
                 <input name="cedula" type="number" class="form-control" id="cedula" aria-describedby="emailHelp" required>
@@ -84,7 +84,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <img src="Backgrounds/imagenes/imagenes/asparagus-2169305_1920.jpg" class="d-block w-100" alt="imagen plato">
+            <img src="../static/Backgrounds/imagenes/imagenes/asparagus-2169305_1920.jpg" class="d-block w-100" alt="imagen plato">
             <h3>Filete de ternera</h3>
             <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> 
             <p class="price">Costo: $38.000</p>
@@ -121,38 +121,38 @@
           et sagittis arcu. Sed tincidunt egestas nibh ac aliquet. Praesent non leo a lorem scelerisque 
           bibendum.</p>
       </article>
-      <img src="Backgrounds/imagenes/imagenes/chef-5993951_1920_1.jpg" />
+      <img src="../static/Backgrounds/imagenes/imagenes/chef-5993951_1920_1.jpg" />
     </section>
     <section id="section3">
       <h2>Categorías</h2>
       <article>
         <div id="starter">
-          <img src="Backgrounds/imagenes/imagenes/canape-2802_1920.jpg"/>
+          <img src="../static/Backgrounds/imagenes/imagenes/canape-2802_1920.jpg"/>
           <h3>Entradas</h3>
           <p>Deliciosos aperitivos, ideales para compartir 
             y abrir el apetito, antes del plato fuerte. Disfruta de nuestras entradas.</p>
-          <button class="categories_button" onclick="location.href='entradas'">Explorar</button>
+          <button class="categories_button" onclick="location.href='entradas.html'">Explorar</button>
         </div>
         <div id="main_course">
-          <img src="Backgrounds/imagenes/imagenes/salmon-518032_1920.jpg"/>
+          <img src="../static/Backgrounds/imagenes/imagenes/salmon-518032_1920.jpg"/>
           <h3>Plato fuerte</h3>
           <p>Gran variedad de platos fuertes en nuestro menú, hechos con  
           las mejores recetas, y un toque exquisito al paladar, conózcalos.</p>
-          <button class="categories_button" onclick="location.href='platos_fuertes'">Explorar</button>
+          <button class="categories_button" onclick="location.href='platos_fuertes.html'">Explorar</button>
         </div>
         <div id="dessert">
-          <img src="Backgrounds/imagenes/imagenes/pancakes-1984716_1920.jpg"/>
+          <img src="../static/Backgrounds/imagenes/imagenes/pancakes-1984716_1920.jpg"/>
           <h3>Postres</h3>
           <p>Exquisitos postres, variados y suavecitos, para endulzar tus comidas. 
             Deleitate probando uno de nuestra carta.</p>
-          <button class="categories_button" onclick="location.href='postres'">Explorar</button>
+          <button class="categories_button" onclick="location.href='postres.html'">Explorar</button>
         </div>
         <div id="others">
-          <img src="Backgrounds/imagenes/imagenes/strawberry-dessert-2191973_1920.jpg"/>
+          <img src="../static/Backgrounds/imagenes/imagenes/strawberry-dessert-2191973_1920.jpg"/>
           <h3>Bebidas</h3>
           <p>Refrescantes bebidas, algunas preparadas en casa, para acompañar tus comidas. 
           Conoce nuestras bebidas en esta sección.</p>
-          <button class="categories_button" onclick="location.href='bebidas'">Explorar</button>
+          <button class="categories_button" onclick="location.href='bebidas.html'">Explorar</button>
         </div>
       </article>
     </section>
@@ -163,28 +163,28 @@
           <div class="carousel-item active">
             <section>
               <article>
-                <img src="Backgrounds/imagenes/imagenes/asparagus-2169305_1920.jpg" class="d-block w-100" alt="imagen plato">
+                <img src="../static/Backgrounds/imagenes/imagenes/asparagus-2169305_1920.jpg" class="d-block w-100" alt="imagen plato">
                 <h3>Filete de ternera</h3>
                 <p class="text">250 gr de filete jugoso de ternera a la parrilla, con una costra de pimienta y reducción en vino blanco. Acompañado con ensalada de esparragos y tomate cherry, en vinagreta, y papa horneada con salsa dip, ligeramente picante.</p> 
                 <p class="price">Costo: $38.000</p>
                 <button class="favorite_button">Añadir al carrito</button>
               </article>
               <article>
-                <img src="Backgrounds/imagenes/imagenes/cupcake-2749204_1920.jpg" class="d-block w-100" alt="imagen cupcake">
+                <img src="../static/Backgrounds/imagenes/imagenes/cupcake-2749204_1920.jpg" class="d-block w-100" alt="imagen cupcake">
                 <h3>Cupcake arcoíris</h3>
                 <p class="text">Esponjoso cupcake de banano, relleno de salsa de chocolate y milo, decorado por encima con crema inglesa, baileys y grageas de colores.</p> 
                 <p class="price">Costo: $15.000</p>
                 <button class="favorite_button">Añadir al carrito</button>
               </article>
               <article>
-                <img src="Backgrounds/imagenes/imagenes/pizza-329523_1920.jpg" class="d-block w-100" alt="imagen pizza">
+                <img src="../static/Backgrounds/imagenes/imagenes/pizza-329523_1920.jpg" class="d-block w-100" alt="imagen pizza">
                 <h3>Pizza de la casa</h3>
                 <p class="text">1 pizza mediana (6 porciones) con trocitos de tocineta, mezclados con pollo, peperoni y rúgula.</p> 
                 <p class="price">Costo: $29.000</p>
                 <button class="favorite_button">Añadir al carrito</button>
               </article>
               <article>
-                <img src="Backgrounds/imagenes/imagenes/pasta-1854245_1920.jpg" class="d-block w-100" alt="imagen pasta pesto">
+                <img src="../static/Backgrounds/imagenes/imagenes/pasta-1854245_1920.jpg" class="d-block w-100" alt="imagen pasta pesto">
                 <h3>Pasta pesto</h3>
                 <p class="text">150g de deliciosos spaguettis o fetuccinis en salsa pesto, con trozos de pechuga de pollo asados al ajillo. Acompañados de ensalada de lechuga, tomate cherry, cebolla y aguacate, en vinagreta.</p> 
                 <p class="price">Costo: $27.000</p>
@@ -195,28 +195,28 @@
           <div class="carousel-item">
             <section>
               <article>
-                <img src="Backgrounds/imagenes/imagenes/corn.jpg" class="d-block w-100" alt="imagen plato">
+                <img src="../static/Backgrounds/imagenes/imagenes/corn.jpg" class="d-block w-100" alt="imagen plato">
                 <h3>Elotes mágicos</h3>
                 <p class="text">2 Mazorcas asadas y parrilladas con mantequilla, aderezadas con mayonesa de la casa y queso mozzarella.</p> 
                 <p class="price">Costo: $12.500</p>
                 <button class="favorite_button">Añadir al carrito</button>
               </article>
               <article>
-                <img src="Backgrounds/imagenes/imagenes/postre1.jpg" class="d-block w-100" alt="imagen cupcake">
+                <img src="../static/Backgrounds/imagenes/imagenes/postre1.jpg" class="d-block w-100" alt="imagen cupcake">
                 <h3>Tiramisú</h3>
                 <p class="text">Dos capas de bizcocho Savoiardi sumergido en cafe espresso y dos capas de Crema de queso mascarpone y licor amaretto.</p> 
                 <p class="price">Costo: $15.000</p>
                 <button class="favorite_button">Añadir al carrito</button>
               </article>
               <article>
-                <img src="Backgrounds/imagenes/imagenes/bbq-ribs.jpg" class="d-block w-100" alt="imagen pizza">
+                <img src="../static/Backgrounds/imagenes/imagenes/bbq-ribs.jpg" class="d-block w-100" alt="imagen pizza">
                 <h3>Costilla de cerdo en salsa bbq.</h3>
                 <p class="text">300 gr de deliciosa costilla de cerdo asada, acompañada de papas a las francesa ensalada de vegetales y porción de arroz adicional.</p> 
                 <p class="price">Costo: $35.000</p>
                 <button class="favorite_button">Añadir al carrito</button>
               </article>
               <article>
-                <img src="Backgrounds/imagenes/imagenes/drink-1487304_640.jpg" class="d-block w-100" alt="imagen pasta pesto">
+                <img src="../static/Backgrounds/imagenes/imagenes/drink-1487304_640.jpg" class="d-block w-100" alt="imagen pasta pesto">
                 <h3>Limonada de la casa</h3>
                 <p class="text">Limonada con hielo, leche condensada y hojas de menta.</p> 
                 <p class="price">Costo: $10.000</p>

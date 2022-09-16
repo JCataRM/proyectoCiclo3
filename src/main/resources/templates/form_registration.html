@@ -32,13 +32,13 @@
             </div>
             
             <div class="row" style="justify-content: center;">
-                <form class="col-8" method="get" action="/registro">
+                <form class="col-8" method="post" action="/registro">
                     <label for="cedula" class="form-label">Cedula de ciudadanía</label>
                     <input name="cedula" type="number" class="form-control" id="cedula" aria-describedby="emailHelp" required>
                     <label for="nombre" class="form-label">Nombre completo</label>
                     <input name="nombre" type="text" class="form-control" id="nombre" aria-describedby="emailHelp" required>
                     <label for="telefono" class="form-label">Celular</label>
-                    <input name="telefono" type="text" class="form-control" id="telefono" aria-describedby="emailHelp" required>
+                    <input name="telefono" type="number" class="form-control" id="telefono" aria-describedby="emailHelp" required>
                     <label for="correo" class="form-label">Correo electrónico</label>
                     <input name="correo" type="email" class="form-control" id="correo" aria-describedby="emailHelp" required>
                     <label for="contrasena" class="form-label">Contraseña</label>
