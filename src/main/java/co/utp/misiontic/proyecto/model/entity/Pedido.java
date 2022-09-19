@@ -53,7 +53,7 @@ public class Pedido implements Serializable{
 
     
     public Pedido() {
-        this.estadoPedido = EstadoPedido.EN_CARRITO;
+        this.estadoPedido = EstadoPedido.PENDIENTE_POR_ENTREGAR;
         this.entradas = new ArrayList<>();
         this.platosFuertes = new ArrayList<>();
         this.postres = new ArrayList<>();

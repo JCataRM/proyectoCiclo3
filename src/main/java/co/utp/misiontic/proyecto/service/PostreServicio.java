@@ -1,6 +1,7 @@
 package co.utp.misiontic.proyecto.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,9 @@ public class PostreServicio {
 
     public List<OpcionPostre> listarPostres() {
         return postreRepositorio.findAll(Sort.by("nombre"));
+    }
+
+    public Optional<OpcionPostre> obtenerPostre(Integer id){
+        return postreRepositorio.findById(id);
     }
 }

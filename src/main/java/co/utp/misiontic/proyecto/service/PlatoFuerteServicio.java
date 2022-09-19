@@ -1,6 +1,7 @@
 package co.utp.misiontic.proyecto.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -17,5 +18,9 @@ public class PlatoFuerteServicio {
 
     public List<OpcionPlatoFuerte> listarPlatosFuertes() {
         return platoFuerteRepositorio.findAll();
+    }
+
+    public Optional<OpcionPlatoFuerte> obtenerPlatoFuerte(Integer id){
+        return platoFuerteRepositorio.findById(id);
     }
 }

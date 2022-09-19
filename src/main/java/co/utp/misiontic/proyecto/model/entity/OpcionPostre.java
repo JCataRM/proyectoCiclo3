@@ -23,7 +23,4 @@ public class OpcionPostre implements Serializable{
     private String imagen;
     private Integer precio;
 
-    @ManyToMany(mappedBy = "postres")
-    private List<Pedido> pedidos;
-
 }

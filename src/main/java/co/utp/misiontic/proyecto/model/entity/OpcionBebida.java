@@ -23,7 +23,4 @@ public class OpcionBebida implements Serializable{
     private String imagen;
     private Integer precio;
 
-    @ManyToMany(mappedBy = "bebidas")
-    private List<Pedido> pedidos;
-
 }

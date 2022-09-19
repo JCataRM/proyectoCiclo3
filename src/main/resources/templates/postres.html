@@ -24,6 +24,11 @@
     <section id="Menu-starter" class="container px-4 text-center">
         <h1>POSTRES</h1>
         <div class="container">
+            <div th:if="${mensaje != null}" >
+                <div th:text="${mensaje}" class="alert alert-warning text-dark" role="alert">
+                    Mensaje
+                </div>
+            </div>
             <div class="row">
                 <div th:each="postre: ${postres}" class="col-12">
                     <article class="menu_starter">
@@ -33,8 +38,8 @@
                         <div class="col-md-9">
                             <h3 th:text="${postre.nombre}">Tiramisú</h3>
                             <p th:text="${postre.descripcion}"></p>
-                            <p class="cost" th:text="'Costo: $' + ${bebida.precio}"></p>
-                            <button>Añadir al carrito</button>
+                            <p class="cost" th:text="'Costo: $' + ${postre.precio}"></p>
+                            <button><a th:href="@{/postres/{id}(id=${postre.id})}">Añadir al carrito</a></button>
                         </div>
                     </article>
                 </div>

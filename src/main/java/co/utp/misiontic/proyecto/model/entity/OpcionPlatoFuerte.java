@@ -23,7 +23,4 @@ public class OpcionPlatoFuerte implements Serializable{
     private String imagen;
     private Integer precio;
 
-    @ManyToMany(mappedBy = "platosFuertes")
-    private List<Pedido> pedidos;
-
 }

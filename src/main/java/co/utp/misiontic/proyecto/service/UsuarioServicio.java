@@ -22,7 +22,7 @@ public class UsuarioServicio {
         return usuarioRepositorio.findById(id);
     }
 
-    public void crearUsuario(Integer cedula, String nombre, String telefono, String correo, String contrasena) {
+    public Usuario crearUsuario(Integer cedula, String nombre, String telefono, String correo, String contrasena) {
         var usuario = new Usuario();
         usuario.setId(cedula);
         usuario.setNombre(nombre);
@@ -32,5 +32,7 @@ public class UsuarioServicio {
         usuario.setTipoUsuario("cliente");
 
         guardarUsuario(usuario);
+
+        return usuario;
     }
 }

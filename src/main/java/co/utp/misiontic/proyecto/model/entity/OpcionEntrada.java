@@ -23,7 +23,7 @@ public class OpcionEntrada implements Serializable{
     private String imagen;
     private Integer precio;
 
-    @ManyToMany(mappedBy = "entradas")
-    private List<Pedido> pedidos;
+    /* @ManyToMany(mappedBy = "entradas")
+    private List<Pedido> pedidos; */
 
 }
