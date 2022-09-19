@@ -97,19 +97,11 @@ public class controlador {
         var usuarioop = usuarioServicio.obtenerUsuario(cedula);
         
         //Si el usuario no existe, se procede a crearlo en la base de datos
-        if (usuarioop.isEmpty()) {
-            var usuario = new Usuario();
-            usuario.setId(cedula);
-            usuario.setNombre(nombre);
-            usuario.setTelefono(telefono);
-            usuario.setCorreo(correo);
-            usuario.setContrasena(contrasena);
-            usuario.setTipoUsuario("cliente");
-        
-            usuarioServicio.guardarUsuario(usuario);
-        } 
+        if(usuarioop.isEmpty()){
+            usuarioServicio.crearUsuario(cedula, nombre, telefono, correo, contrasena);
+
         // Si el usuario existe se le muestra un mensaje de que ya tiene una cuenta
-        else {
+        }else {
             modelo.addAttribute("mensaje", "El usuario ya tiene una cuenta vinculada con ese número de cédula");
             return "form_registration";
         }  
@@ -131,9 +123,9 @@ public class controlador {
             modelo.addAttribute("mensaje", "El usuario no tiene una cuenta vinculada a este número de cédula. Lo invitamos a crearla.");
             return "form_registration";
         } 
-        // Si el usuario existe se le muestra un mensaje de que ya tiene una cuenta
-        else {
-            modelo.addAttribute("nombre", usuario.get().getNombre());
+        // Si el usuario existe se valida la contraseña
+        if (!usuario.get().getContrasena().equals(contrasena)) {
+            modelo.addAttribute("mensaje", "El usuario o la contraseña son incorrectas");
         }
 
         return "index";

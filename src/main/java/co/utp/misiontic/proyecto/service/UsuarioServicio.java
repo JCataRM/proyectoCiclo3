@@ -21,4 +21,16 @@ public class UsuarioServicio {
     public Optional<Usuario> obtenerUsuario(Integer id){
         return usuarioRepositorio.findById(id);
     }
+
+    public void crearUsuario(Integer cedula, String nombre, String telefono, String correo, String contrasena) {
+        var usuario = new Usuario();
+        usuario.setId(cedula);
+        usuario.setNombre(nombre);
+        usuario.setTelefono(telefono);
+        usuario.setCorreo(correo);
+        usuario.setContrasena(contrasena);
+        usuario.setTipoUsuario("cliente");
+
+        guardarUsuario(usuario);
+    }
 }
