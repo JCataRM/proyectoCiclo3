@@ -2,9 +2,7 @@ package co.utp.misiontic.proyecto.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import co.utp.misiontic.proyecto.model.entity.*;
 import co.utp.misiontic.proyecto.service.*;
@@ -104,7 +102,7 @@ public class controlador {
     
 //-----------------------------------Cuenta del usuario----------------------------------------------
 
-    @GetMapping("/registro")
+    @PostMapping("/registro")
     public String registroUsuario(@RequestParam("cedula") Integer cedula,
         @RequestParam("nombre") String nombre, 
         @RequestParam("telefono") String telefono,
@@ -129,7 +127,7 @@ public class controlador {
         return "index";
     }
 
-    @GetMapping("/inicio_sesion")
+    @PostMapping("/inicio_sesion")
     public String ingresoSesion(@RequestParam("cedula") Integer cedula,
         @RequestParam("contrasena") String contrasena,
         Model modelo
