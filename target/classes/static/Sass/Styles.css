@@ -62,6 +62,24 @@
   padding: 3% 0;
 }
 
+#exampleModal1 #reservation h2 {
+  text-align: center;
+  color: orange;
+}
+#exampleModal1 #reservation label {
+  padding-left: 3%;
+  font-family: cursive;
+  line-height: 35px;
+}
+#exampleModal1 #reservation input {
+  color: deepskyblue;
+  background: aliceblue;
+}
+#exampleModal1 .modal-footer .btn.btn-primary .order_button {
+  color: white;
+  text-decoration: none;
+}
+
 #section1 {
   background-image: url("../Backgrounds/imagenes/imagenes/platter-2009590_1920.jpg");
   height: 40rem;
@@ -348,4 +366,19 @@
 
 #come_back {
   margin: 3%;
+}
+
+#wp_button {
+  background: lawngreen;
+  border-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 1%;
+}
+#wp_button .link_wp i {
+  color: white;
+  font-size: 30px;
 }/*# sourceMappingURL=Styles.css.map */

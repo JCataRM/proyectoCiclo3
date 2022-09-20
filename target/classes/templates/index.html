@@ -41,7 +41,9 @@
             <a class="nav-link active" aria-current="page" href="/">Inicio</a>
             <a class="nav-link" href="#section3">Menú</a>
             <a class="nav-link" href="#section2">Sobre nosotros</a>
-            <a class="nav-link" th:href="${nombre != null ? 'cerrar_sesion' : '#' }" id="sign_in" th:data-bs-toggle="${nombre != null ? '' : 'modal' }" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" th:text="${nombre != null ? 'Cerrar sesión' : 'Mi cuenta' }"></a>
+            <a class="nav-link" th:href="${nombre != null ? 'cerrar_sesion' : '#' }" id="sign_in"
+              th:data-bs-toggle="${nombre != null ? '' : 'modal' }" data-bs-target="#exampleModal"
+              data-bs-whatever="@getbootstrap" th:text="${nombre != null ? 'Cerrar sesión' : 'Mi cuenta' }"></a>
             <a class="nav-link" href="#" id="shopping cart" data-bs-toggle="modal" data-bs-target="#exampleModal1">
               <i class="fa-solid fa-cart-shopping"></i>
             </a>
@@ -51,33 +53,34 @@
     </nav>
   </header>
   <!--Modal sign in-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Inicie sesión</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form method="post" action="/inicio_sesion">
-              <div class="mb-3">
-                <label for="cedula" class="form-label">Cédula</label>
-                <input name="cedula" type="number" class="form-control" id="cedula" aria-describedby="emailHelp" required>
-                <div id="emailHelp" class="form-text">Nosotros nunca compartiremos su correo electrónico con nadie.</div>
-              </div>
-              <div class="mb-3">
-                <label for="contrasena" class="form-label">Contraseña</label>
-                <input name="contrasena" type="password" class="form-control" id="contrasena" required>
-              </div>
-              <div>
-                <p>Si aún no está registrado y desea hacerlo, haga clic <a id="registration" href="form_registration">AQUÍ</a></p>
-              </div>
-              <button type="submit" class="btn btn-primary">Enviar</button>
-            </form>
-          </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Inicie sesión</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="/inicio_sesion">
+            <div class="mb-3">
+              <label for="cedula" class="form-label">Cédula</label>
+              <input name="cedula" type="number" class="form-control" id="cedula" aria-describedby="emailHelp" required>
+              <div id="emailHelp" class="form-text">Nosotros nunca compartiremos su correo electrónico con nadie.</div>
+            </div>
+            <div class="mb-3">
+              <label for="contrasena" class="form-label">Contraseña</label>
+              <input name="contrasena" type="password" class="form-control" id="contrasena" required>
+            </div>
+            <div>
+              <p>Si aún no está registrado y desea hacerlo, haga clic <a id="registration"
+                  href="form_registration">AQUÍ</a></p>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
         </div>
       </div>
     </div>
+  </div>
   </div>
   <!--Modal shopping cart-->
   <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -117,17 +120,19 @@
         </div>
         <!-- Datos de la reserva -->
         <form action="/pedido" method="post">
-        <div>
-          <h2 th:text="'Valor total a pagar: $' + ${total}"></h2>
-          <label for="fecha_reserva" class="form-label">Fecha de la reserva</label>
-          <input name="fecha_reserva" type="date" class="form-control" id="fecha_reserva" aria-describedby="emailHelp" required>
-          <label for="hora_reserva" class="form-label">Hora de la reserva</label>
-          <input name="hora_reserva" type="time" class="form-control" id="hora_reserva" aria-describedby="emailHelp" required>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Hacer pedido</button>
-        </div>
+          <div id="reservation">
+            <h2 th:text="'Valor total a pagar: $' + ${total}"></h2>
+            <label for="fecha_reserva" class="form-label">Fecha de la reserva:</label>
+            <input name="fecha_reserva" type="date" class="form-control" id="fecha_reserva" aria-describedby="emailHelp"
+              required>
+            <label for="hora_reserva" class="form-label">Hora de la reserva:</label>
+            <input name="hora_reserva" type="time" class="form-control" id="hora_reserva" aria-describedby="emailHelp"
+              required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Hacer pedido</button>
+          </div>
         </form>
       </div>
     </div>
@@ -199,18 +204,17 @@
         <div class="carousel-item active">
           <section>
             <article>
-              <img src="images/plato3.jpg" class="d-block w-100"
-                alt="imagen plato">
+              <img src="images/plato3.jpg" class="d-block w-100" alt="imagen plato">
               <h3>Filete de ternera</h3>
               <p class="text">250 gr de filete jugoso de ternera a la parrilla, con una costra de pimienta y reducción
                 en vino blanco. Acompañado con ensalada de esparragos y tomate cherry, en vinagreta, y papa horneada con
                 salsa dip, ligeramente picante.</p>
               <p class="price">Costo: $38.000</p>
-              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/3'">Añadir al carrito</button>
-              </article>
+              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/3'">Añadir al
+                carrito</button>
+            </article>
             <article>
-              <img src="images/postre6.jpg" class="d-block w-100"
-                alt="imagen cupcake">
+              <img src="images/postre6.jpg" class="d-block w-100" alt="imagen cupcake">
               <h3>Cupcake arcoíris</h3>
               <p class="text">Esponjoso cupcake de banano, relleno de salsa de chocolate y milo, decorado por encima con
                 crema inglesa, baileys y grageas de colores.</p>
@@ -223,17 +227,18 @@
               <p class="text">1 pizza mediana (6 porciones) con trocitos de tocineta, mezclados con pollo, peperoni y
                 rúgula.</p>
               <p class="price">Costo: $29.000</p>
-              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/6'">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/6'">Añadir al
+                carrito</button>
             </article>
             <article>
-              <img src="images/plato7.jpg" class="d-block w-100"
-                alt="imagen pasta pesto">
+              <img src="images/plato7.jpg" class="d-block w-100" alt="imagen pasta pesto">
               <h3>Pasta pesto</h3>
               <p class="text">150g de deliciosos spaguettis o fetuccinis en salsa pesto, con trozos de pechuga de pollo
                 asados al ajillo. Acompañados de ensalada de lechuga, tomate cherry, cebolla y aguacate, en vinagreta.
               </p>
               <p class="price">Costo: $27.000</p>
-              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/7'">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/7'">Añadir al
+                carrito</button>
             </article>
           </section>
         </div>
@@ -261,7 +266,8 @@
               <p class="text">300 gr de deliciosa costilla de cerdo asada, acompañada de papas a las francesa ensalada
                 de vegetales y porción de arroz adicional.</p>
               <p class="price">Costo: $35.000</p>
-              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/4'">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/4'">Añadir al
+                carrito</button>
             </article>
             <article>
               <img src="images/bebida4.jpg" class="d-block w-100" alt="imagen Limonada">
@@ -312,6 +318,8 @@
           target="_blank">AQUÍ</a></p>
     </div>
   </footer>
+  <button id="wp_button"><a class="link_wp" href="https://web.whatsapp.com"><i
+        class="fa-brands fa-whatsapp"></i></a></button>
 </body>
 
 </html>
