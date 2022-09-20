@@ -24,6 +24,17 @@
                         color: purple;
                     }
                 }
+                ul.dropdown-menu {
+                    left: 67rem;
+                    background: black;
+                    li{
+                        a.dropdown-item {
+                            &:hover {
+                                background-color: transparent;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

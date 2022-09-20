@@ -42,6 +42,13 @@
             <a class="nav-link" href="#section3">Menú</a>
             <a class="nav-link" href="#section2">Sobre nosotros</a>
             <a class="nav-link" th:href="${nombre != null ? 'cerrar_sesion' : '#' }" id="sign_in" th:data-bs-toggle="${nombre != null ? '' : 'modal' }" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" th:text="${nombre != null ? 'Cerrar sesión' : 'Mi cuenta' }"></a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Hola ${Nombre}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="pedidos">Ver pedidos</a></li>
+              <li><a class="dropdown-item" href="#">Cerrar</a></li>
+            </ul>
             <a class="nav-link" href="#" id="shopping cart" data-bs-toggle="modal" data-bs-target="#exampleModal1">
               <i class="fa-solid fa-cart-shopping"></i>
             </a>

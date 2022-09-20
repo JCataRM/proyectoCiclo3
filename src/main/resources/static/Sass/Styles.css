@@ -23,6 +23,13 @@
 #header .navbar-expand-lg .navbar-collapse .navbar-nav a:active {
   color: purple;
 }
+#header .navbar-expand-lg .navbar-collapse .navbar-nav ul.dropdown-menu {
+  left: 67rem;
+  background: black;
+}
+#header .navbar-expand-lg .navbar-collapse .navbar-nav ul.dropdown-menu li a.dropdown-item:hover {
+  background-color: transparent;
+}
 
 #exampleModal .modal-dialog .modal-content .modal-body form div p #registration {
   cursor: pointer;
