@@ -7,21 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Restaurante Magic</title>
   <!--Icon tab-->
-  <link rel="shortcut icon" href="Backgrounds/hat-wizard-solid.svg" />
+  <link rel="shortcut icon" href="../Backgrounds/hat-wizard-solid.svg" />
   <!--Files css bootstrap-->
-  <link rel="stylesheet" href="Bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="Bootstrap/bootstrap.css.map">
-  <link rel="stylesheet" href="Bootstrap/bootstrap-grid.css.map">
-  <link rel="stylesheet" href="Bootstrap/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="Bootstrap/bootstrap-reboot.rtl.min.css">
-  <link rel="stylesheet" href="Bootstrap/bootstrap-reboot.rtl.min.css.map">
+  <link rel="stylesheet" href="../Bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="../Bootstrap/bootstrap.css.map">
+  <link rel="stylesheet" href="../Bootstrap/bootstrap-grid.css.map">
+  <link rel="stylesheet" href="../Bootstrap/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="../Bootstrap/bootstrap-reboot.rtl.min.css">
+  <link rel="stylesheet" href="../Bootstrap/bootstrap-reboot.rtl.min.css.map">
 
   <!--File css styles-->
-  <link rel="stylesheet" href="Sass/Styles.css">
+  <link rel="stylesheet" href="../Sass/Styles.css">
 
   <!--Files js bootstrap-->
-  <script defer src="Bootstrap/bootstrap.bundle.min.js"></script>
-  <script defer src="Bootstrap/bootstrap.bundle.js.map"></script>
+  <script defer src="../Bootstrap/bootstrap.bundle.min.js"></script>
+  <script defer src="../Bootstrap/bootstrap.bundle.js.map"></script>
 
   <!--File js icons-->
   <script defer src="https://kit.fontawesome.com/f030a86100.js" crossorigin="anonymous"></script>
@@ -31,14 +31,14 @@
   <header id="header">
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Restaurante Magic</a>
+        <a class="navbar-brand" href="/">Restaurante Magic</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="#section1">Inicio</a>
+            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
             <a class="nav-link" href="#section3">Menú</a>
             <a class="nav-link" href="#section2">Sobre nosotros</a>
             <a class="nav-link" th:href="${nombre != null ? 'cerrar_sesion' : '#' }" id="sign_in" th:data-bs-toggle="${nombre != null ? '' : 'modal' }" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" th:text="${nombre != null ? 'Cerrar sesión' : 'Mi cuenta' }"></a>
@@ -58,33 +58,34 @@
     </nav>
   </header>
   <!--Modal sign in-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Inicie sesión</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form method="post" action="/inicio_sesion">
-              <div class="mb-3">
-                <label for="cedula" class="form-label">Cédula</label>
-                <input name="cedula" type="number" class="form-control" id="cedula" aria-describedby="emailHelp" required>
-                <div id="emailHelp" class="form-text">Nosotros nunca compartiremos su correo electrónico con nadie.</div>
-              </div>
-              <div class="mb-3">
-                <label for="contrasena" class="form-label">Contraseña</label>
-                <input name="contrasena" type="password" class="form-control" id="contrasena" required>
-              </div>
-              <div>
-                <p>Si aún no está registrado y desea hacerlo, haga clic <a id="registration" href="form_registration">AQUÍ</a></p>
-              </div>
-              <button type="submit" class="btn btn-primary">Enviar</button>
-            </form>
-          </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Inicie sesión</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="/inicio_sesion">
+            <div class="mb-3">
+              <label for="cedula" class="form-label">Cédula</label>
+              <input name="cedula" type="number" class="form-control" id="cedula" aria-describedby="emailHelp" required>
+              <div id="emailHelp" class="form-text">Nosotros nunca compartiremos su correo electrónico con nadie.</div>
+            </div>
+            <div class="mb-3">
+              <label for="contrasena" class="form-label">Contraseña</label>
+              <input name="contrasena" type="password" class="form-control" id="contrasena" required>
+            </div>
+            <div>
+              <p>Si aún no está registrado y desea hacerlo, haga clic <a id="registration"
+                  href="form_registration">AQUÍ</a></p>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
         </div>
       </div>
     </div>
+  </div>
   </div>
   <!--Modal shopping cart-->
   <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -99,43 +100,45 @@
           <h3 th:text="${entrada.nombre}"></h3>
           <p class="text" th:text="${entrada.descripcion}"></p>
           <p class="price" th:text="'Costo: $' + ${entrada.precio}"></p>
-          <a th:href="@{/eliminar/entrada/{id}(id=${entrada.id})}">Eliminar</a>
+          <a th:href="@{/eliminar_entrada/{id}(id=${entrada.id})}">Eliminar</a>
         </div>
         <div th:each="plato: ${opPlatos}" class="modal-body">
           <img th:src="${plato.imagen}" class="d-block w-100" alt="imagen plato">
           <h3 th:text="${plato.nombre}"></h3>
           <p class="text" th:text="${plato.descripcion}"></p>
           <p class="price" th:text="'Costo: $' + ${plato.precio}"></p>
-          <a th:href="@{/eliminar/plato/{id}(id=${plato.id})}">Eliminar</a>
+          <a th:href="@{/eliminar_plato_fuerte/{id}(id=${plato.id})}">Eliminar</a>
         </div>
         <div th:each="postre: ${opPostres}" class="modal-body">
           <img th:src="${postre.imagen}" class="d-block w-100" alt="imagen plato">
           <h3 th:text="${postre.nombre}"></h3>
           <p class="text" th:text="${postre.descripcion}"></p>
           <p class="price" th:text="'Costo: $' + ${postre.precio}"></p>
-          <a th:href="@{/eliminar/postre/{id}(id=${postre.id})}">Eliminar</a>
+          <a th:href="@{/eliminar_postre/{id}(id=${postre.id})}">Eliminar</a>
         </div>
         <div th:each="bebida: ${opBebidas}" class="modal-body">
           <img th:src="${bebida.imagen}" class="d-block w-100" alt="imagen plato">
           <h3 th:text="${bebida.nombre}"></h3>
           <p class="text" th:text="${bebida.descripcion}"></p>
           <p class="price" th:text="'Costo: $' + ${bebida.precio}"></p>
-          <a th:href="@{/eliminar/bebida/{id}(id=${bebida.id})}">Eliminar</a>
+          <a th:href="@{/eliminar_bebida/{id}(id=${bebida.id})}">Eliminar</a>
         </div>
         <!-- Datos de la reserva -->
-        <div id="reservation">
-          <h2 th:text="'Valor total a pagar: $' + ${total}"></h2>
-          <label for="fecha_reserva" class="form-label">Fecha de la reserva:</label>
-          <input name="fecha_reserva" type="date" class="form-control" id="fecha_reserva" aria-describedby="emailHelp"
-            required>
-          <label for="hora_reserva" class="form-label">Hora de la reserva:</label>
-          <input name="hora_reserva" type="time" class="form-control" id="hora_reserva" aria-describedby="emailHelp"
-            required>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary"><a class="order_button" href="pedido">Hacer pedido</a></button>
-        </div>
+        <form action="/pedido" method="post">
+          <div id="reservation">
+            <h2 th:text="'Valor total a pagar: $' + ${total}"></h2>
+            <label for="fecha_reserva" class="form-label">Fecha de la reserva:</label>
+            <input name="fecha_reserva" type="date" class="form-control" id="fecha_reserva" aria-describedby="emailHelp"
+              required>
+            <label for="hora_reserva" class="form-label">Hora de la reserva:</label>
+            <input name="hora_reserva" type="time" class="form-control" id="hora_reserva" aria-describedby="emailHelp"
+              required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Hacer pedido</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -206,77 +209,77 @@
         <div class="carousel-item active">
           <section>
             <article>
-              <img src="Backgrounds/imagenes/imagenes/asparagus-2169305_1920.jpg" class="d-block w-100"
-                alt="imagen plato">
+              <img src="images/plato3.jpg" class="d-block w-100" alt="imagen plato">
               <h3>Filete de ternera</h3>
               <p class="text">250 gr de filete jugoso de ternera a la parrilla, con una costra de pimienta y reducción
                 en vino blanco. Acompañado con ensalada de esparragos y tomate cherry, en vinagreta, y papa horneada con
                 salsa dip, ligeramente picante.</p>
               <p class="price">Costo: $38.000</p>
-              <button class="favorite_button">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/3'">Añadir al
+                carrito</button>
             </article>
             <article>
-              <img src="Backgrounds/imagenes/imagenes/cupcake-2749204_1920.jpg" class="d-block w-100"
-                alt="imagen cupcake">
+              <img src="images/postre6.jpg" class="d-block w-100" alt="imagen cupcake">
               <h3>Cupcake arcoíris</h3>
               <p class="text">Esponjoso cupcake de banano, relleno de salsa de chocolate y milo, decorado por encima con
                 crema inglesa, baileys y grageas de colores.</p>
               <p class="price">Costo: $15.000</p>
-              <button class="favorite_button">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_postre/6'">Añadir al carrito</button>
             </article>
             <article>
-              <img src="Backgrounds/imagenes/imagenes/pizza-329523_1920.jpg" class="d-block w-100" alt="imagen pizza">
+              <img src="images/plato6.jpg" class="d-block w-100" alt="imagen pizza">
               <h3>Pizza de la casa</h3>
               <p class="text">1 pizza mediana (6 porciones) con trocitos de tocineta, mezclados con pollo, peperoni y
                 rúgula.</p>
               <p class="price">Costo: $29.000</p>
-              <button class="favorite_button">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/6'">Añadir al
+                carrito</button>
             </article>
             <article>
-              <img src="Backgrounds/imagenes/imagenes/pasta-1854245_1920.jpg" class="d-block w-100"
-                alt="imagen pasta pesto">
+              <img src="images/plato7.jpg" class="d-block w-100" alt="imagen pasta pesto">
               <h3>Pasta pesto</h3>
               <p class="text">150g de deliciosos spaguettis o fetuccinis en salsa pesto, con trozos de pechuga de pollo
                 asados al ajillo. Acompañados de ensalada de lechuga, tomate cherry, cebolla y aguacate, en vinagreta.
               </p>
               <p class="price">Costo: $27.000</p>
-              <button class="favorite_button">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/7'">Añadir al
+                carrito</button>
             </article>
           </section>
         </div>
         <div class="carousel-item">
           <section>
             <article>
-              <img src="Backgrounds/imagenes/imagenes/corn.jpg" class="d-block w-100" alt="imagen plato">
+              <img src="images/entrada3.jpg" class="d-block w-100" alt="imagen plato">
               <h3>Elotes mágicos</h3>
               <p class="text">2 Mazorcas asadas y parrilladas con mantequilla, aderezadas con mayonesa de la casa y
                 queso mozzarella.</p>
               <p class="price">Costo: $12.500</p>
-              <button class="favorite_button">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_entradas/3'">Añadir al carrito</button>
             </article>
             <article>
-              <img src="Backgrounds/imagenes/imagenes/postre1.jpg" class="d-block w-100" alt="imagen cupcake">
+              <img src="images/postre1.jpg" class="d-block w-100" alt="imagen cupcake">
               <h3>Tiramisú</h3>
               <p class="text">Dos capas de bizcocho Savoiardi sumergido en cafe espresso y dos capas de Crema de queso
                 mascarpone y licor amaretto.</p>
               <p class="price">Costo: $15.000</p>
-              <button class="favorite_button">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_postres/1'">Añadir al carrito</button>
             </article>
             <article>
-              <img src="Backgrounds/imagenes/imagenes/bbq-ribs.jpg" class="d-block w-100" alt="imagen pizza">
+              <img src="images/plato4.jpg" class="d-block w-100" alt="imagen pizza">
               <h3>Costilla de cerdo en salsa bbq.</h3>
               <p class="text">300 gr de deliciosa costilla de cerdo asada, acompañada de papas a las francesa ensalada
                 de vegetales y porción de arroz adicional.</p>
               <p class="price">Costo: $35.000</p>
-              <button class="favorite_button">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_platos_fuertes/4'">Añadir al
+                carrito</button>
             </article>
             <article>
-              <img src="Backgrounds/imagenes/imagenes/drink-1487304_640.jpg" class="d-block w-100"
-                alt="imagen pasta pesto">
+              <img src="images/bebida4.jpg" class="d-block w-100" alt="imagen Limonada">
               <h3>Limonada de la casa</h3>
               <p class="text">Limonada con hielo, leche condensada y hojas de menta.</p>
               <p class="price">Costo: $10.000</p>
-              <button class="favorite_button">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_bebidas/4'">Añadir al carrito</button>
             </article>
           </section>
         </div>
@@ -320,7 +323,8 @@
           target="_blank">AQUÍ</a></p>
     </div>
   </footer>
-  <button id="wp_button"><a class="link_wp" href="https://web.whatsapp.com"><i class="fa-brands fa-whatsapp"></i></a></button>
+  <button id="wp_button"><a class="link_wp" href="https://web.whatsapp.com"><i
+        class="fa-brands fa-whatsapp"></i></a></button>
 </body>
 
 </html>

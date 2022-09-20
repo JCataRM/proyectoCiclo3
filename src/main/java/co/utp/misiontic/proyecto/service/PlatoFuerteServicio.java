@@ -17,7 +17,7 @@ public class PlatoFuerteServicio {
     private PlatoFuerteRepositorio platoFuerteRepositorio;
 
     public List<OpcionPlatoFuerte> listarPlatosFuertes() {
-        return platoFuerteRepositorio.findAll();
+        return platoFuerteRepositorio.findAll(Sort.by("nombre"));
     }
 
     public Optional<OpcionPlatoFuerte> obtenerPlatoFuerte(Integer id){
