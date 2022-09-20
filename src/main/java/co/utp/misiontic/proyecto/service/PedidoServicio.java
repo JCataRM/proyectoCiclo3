@@ -1,15 +1,13 @@
 package co.utp.misiontic.proyecto.service;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.utp.misiontic.proyecto.model.entity.*;
+import co.utp.misiontic.proyecto.model.entity.Pedido;
 import co.utp.misiontic.proyecto.repository.PedidoRepositorio;
 
 @Service
@@ -17,10 +15,6 @@ public class PedidoServicio {
 
     @Autowired
     private PedidoRepositorio pedidoRepositorio;
-
-    public void guardarEntradaEnPedido(OpcionEntrada entrada){
-        
-    }
 
     public Pedido crearPedido() {
         var pedido = pedidoRepositorio.save(new Pedido());
@@ -32,6 +26,7 @@ public class PedidoServicio {
     }
 
     public void guardarPedido(Pedido pedido){
+
         pedidoRepositorio.save(pedido);
     }
 
@@ -53,5 +48,34 @@ public class PedidoServicio {
 
         return valorTotal;
     }
+
+    public List<Pedido> listarPedidosPorEntregar(){
+        var pedidos = pedidoRepositorio.findAll();
+
+        var pedidosPendientes = pedidos.stream()
+            .filter(m -> m.getEstadoPedido().equals("PENDIENTE_POR_ENTREGAR")).collect(Collectors.toList());
+            System.out.println("Pedidos Pendientes -----------------> " + pedidosPendientes);
+            return pedidosPendientes;
+    }
+
+    public List<Pedido> listarPedidosPorEntregarPorCliente(Integer cedula){
+        var pedidos = pedidoRepositorio.findAll();
+
+        var pedidosPendientesPorCliente = pedidos.stream()
+            .filter(m -> m.getEstadoPedido().equals("PENDIENTE_POR_ENTREGAR"))
+            .filter(m -> m.getUsuario().getId().equals(cedula))
+            .collect(Collectors.toList());
+        
+            System.out.println("Cedula-----------------> "+cedula + ". Pedido ------>" + pedidosPendientesPorCliente);
+        return pedidosPendientesPorCliente;
+    }
+
+    public void actualizarEstadoPedido(Integer id){
+        var pedido = pedidoRepositorio.findById(id).get();
+
+        pedido.setEstadoPedido("ENTREGADO");
+        pedidoRepositorio.save(pedido);
+    }
+
     
 }

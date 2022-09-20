@@ -38,15 +38,10 @@ class OpcionBebida{
     - Integer precio
 }
 
-enum EstadoPedido{
-    SIN_ENTREGAR
-    ENTREGADO
-}
 
 Pedido "*" -- "0..1" OpcionEntrada
 Pedido "*" -- "0..1" OpcionPlatoFuerte
 Pedido "*" -- "0..1" OpcionPostre
 Pedido "*" -- "0..1" OpcionBebida
-Pedido .left.> EstadoPedido
 
 @enduml

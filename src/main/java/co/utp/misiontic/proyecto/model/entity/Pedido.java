@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import co.utp.misiontic.proyecto.model.EstadoPedido;
 import lombok.*;
 
 @Data
@@ -21,7 +20,7 @@ public class Pedido implements Serializable{
 
     private String fecha_reserva;
     private String hora_reserva;
-    private EstadoPedido estadoPedido;
+    private String estadoPedido;
     private Integer precio_total;
 
     @ManyToOne
@@ -53,7 +52,7 @@ public class Pedido implements Serializable{
 
     
     public Pedido() {
-        this.estadoPedido = EstadoPedido.PENDIENTE_POR_ENTREGAR;
+        this.estadoPedido = "PENDIENTE_POR_ENTREGAR";
         this.entradas = new ArrayList<>();
         this.platosFuertes = new ArrayList<>();
         this.postres = new ArrayList<>();
