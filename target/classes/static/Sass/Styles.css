@@ -69,9 +69,21 @@
   padding: 3% 0;
 }
 
+#exampleModal1 .modal-body h3 {
+  margin-top: 3%;
+  font-size: 20px;
+  font-family: cursive;
+}
+#exampleModal1 .modal-body .price {
+  color: darkgray;
+}
+#exampleModal1 .modal-body a {
+  color: deepskyblue;
+}
 #exampleModal1 #reservation h2 {
   text-align: center;
   color: orange;
+  font-size: 24px;
 }
 #exampleModal1 #reservation label {
   padding-left: 3%;
@@ -349,14 +361,19 @@
 }
 #Menu-starter .menu_starter div.col-md-9 button {
   background: black;
-  color: wheat;
   border-radius: 9px;
   box-shadow: 1px 2px 5px 0px rgba(10, 214, 163, 0.6);
 }
 #Menu-starter .menu_starter div.col-md-9 button:hover {
   background: aquamarine;
-  color: black;
   box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.6);
+}
+#Menu-starter .menu_starter div.col-md-9 button:hover a {
+  color: black;
+}
+#Menu-starter .menu_starter div.col-md-9 button a {
+  color: wheat;
+  text-decoration: none;
 }
 
 #body_main_course {
@@ -364,7 +381,7 @@
 }
 
 #body_dessert {
-  background: linear-gradient(45deg, lavenderblush, transparent);
+  background: linear-gradient(45deg, pink, transparent);
 }
 
 #body_beverages {
