@@ -83,6 +83,33 @@
     }
 }
 
+//Modal shopping cart
+#exampleModal1 {
+    #reservation {
+        h2 {
+            text-align: center;
+            color: orange;
+        }
+        label {
+            padding-left: 3%;
+            font-family: cursive;
+            line-height: 35px;
+        }
+        input {
+            color: deepskyblue;
+            background: aliceblue;
+        }
+    }
+    .modal-footer {
+        .btn.btn-primary {
+            .order_button {
+                color: white;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
 //Section 1
 #section1 {
     background-image: url("../Backgrounds/imagenes/imagenes/platter-2009590_1920.jpg");
@@ -387,5 +414,23 @@
 //Come back button
 #come_back {
     margin: 3%;
+}
+
+//Whatsapp button
+#wp_button {
+    background: lawngreen;
+    border-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 1%;
+    .link_wp {
+        i {
+            color: white;
+            font-size: 30px;
+        }
+    }
 }
 

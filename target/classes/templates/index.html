@@ -116,18 +116,18 @@
           <a th:href="@{/eliminar/bebida/{id}(id=${bebida.id})}">Eliminar</a>
         </div>
         <!-- Datos de la reserva -->
-        <div>
+        <div id="reservation">
           <h2 th:text="'Valor total a pagar: $' + ${total}"></h2>
-          <label for="fecha_reserva" class="form-label">Fecha de la reserva</label>
+          <label for="fecha_reserva" class="form-label">Fecha de la reserva:</label>
           <input name="fecha_reserva" type="date" class="form-control" id="fecha_reserva" aria-describedby="emailHelp"
             required>
-          <label for="hora_reserva" class="form-label">Hora de la reserva</label>
+          <label for="hora_reserva" class="form-label">Hora de la reserva:</label>
           <input name="hora_reserva" type="time" class="form-control" id="hora_reserva" aria-describedby="emailHelp"
             required>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary"><a href="pedido">Hacer pedido</a></button>
+          <button type="button" class="btn btn-primary"><a class="order_button" href="pedido">Hacer pedido</a></button>
         </div>
       </div>
     </div>
@@ -313,6 +313,7 @@
           target="_blank">AQUÍ</a></p>
     </div>
   </footer>
+  <button id="wp_button"><a class="link_wp" href="https://web.whatsapp.com"><i class="fa-brands fa-whatsapp"></i></a></button>
 </body>
 
 </html>
