@@ -24,10 +24,9 @@
     <section id="Menu-starter">
         <h1>PLATOS FUERTES</h1>
         <div class="container">
-            <div th:if="${mensaje != null}" >
-                <div th:text="${mensaje}" class="alert alert-warning text-dark" role="alert">
-                    Mensaje
-                </div>
+            <div th:if="${mensaje != null}" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <p th:text="${mensaje}"></p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <div class="row">
                 <div th:each="platoFuerte: ${platosFuertes}" class="col-12">

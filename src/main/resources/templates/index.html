@@ -41,10 +41,12 @@
             <a class="nav-link active" aria-current="page" href="/">Inicio</a>
             <a class="nav-link" href="#section3">Menú</a>
             <a class="nav-link" href="#section2">Sobre nosotros</a>
-            <a class="nav-link" th:if="${nombreUsuario == null}" href="#" id="sign_in" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Mi cuenta</a>
-            <a class="nav-link dropdown-toggle" th:if="${nombreUsuario != null}" href="#" th:text="'Hola ' + ${nombreUsuario}" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+            <a class="nav-link" th:if="${nombreUsuario == null}" href="#" id="sign_in" data-bs-toggle="modal"
+              data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Mi cuenta</a>
+            <a class="nav-link dropdown-toggle" th:if="${nombreUsuario != null}" href="#"
+              th:text="'Hola ' + ${nombreUsuario}" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="pedidos">Ver pedidos</a></li>
+              <li><a class="dropdown-item" href="pedidos">Ver reservas</a></li>
               <li><a class="dropdown-item" href="/cerrar_sesion">Cerrar</a></li>
             </ul>
             <a class="nav-link" href="#" id="shopping cart" data-bs-toggle="modal" data-bs-target="#exampleModal1">
@@ -131,15 +133,29 @@
             <label for="hora_reserva" class="form-label">Hora de la reserva:</label>
             <input name="hora_reserva" type="time" class="form-control" id="hora_reserva" aria-describedby="emailHelp"
               required>
+            <p><b>Importante:</b> recuerde que la reserva se debe realizar con un día de anticipación.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Hacer pedido</button>
+            <button type="submit" class="btn btn-primary">Realizar reserva</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+
+  <!-- Alertas -->
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${mensaje != null}">
+    <br><br><br>
+    <strong>Ups, tenemos un problema! </strong> <span th:text="${mensaje}"></span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${mensajeOk != null}">
+    <br><br><br>
+    <strong>Excelente! </strong> <span th:text="${mensajeOk}"></span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
   <section id="section1">
     <h1 id="p_title">Bienvenidos al restaurante Magic!</h1>
     <div id="social_media">
@@ -292,6 +308,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+    </div>
   </section>
   <footer id="footer">
     <div>

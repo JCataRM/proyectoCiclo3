@@ -69,6 +69,7 @@ public class controlador {
        
         return "index";
     }
+
     @GetMapping("/entradas")
     public String menuEntradas(Model modelo){
         var entradas = this.entradaServicio.listarEntradas();
@@ -161,7 +162,7 @@ public class controlador {
         } 
         // Si el usuario existe se valida la contraseña
         if (!usuarioOp.get().getContrasena().equals(contrasena)) {
-            modelo.addAttribute("mensaje", "El usuario o la contraseña son incorrectas");
+            modelo.addAttribute("mensaje", "El usuario o la contraseña son incorrectas. Por favor intente nuevamente.");
 
         // Se agrega el usuario al pedido que se encuentra abierto
         }else{
@@ -169,6 +170,7 @@ public class controlador {
             var nombreUsuario = usuario.getNombre();
             this.pedidoActual.setUsuario(usuario);
             modelo.addAttribute("nombreUsuario", nombreUsuario);
+            modelo.addAttribute("mensaje", null);
         }   
         inicio(modelo);
         return "index";
@@ -191,7 +193,7 @@ public class controlador {
         if (!entrada.isEmpty()) {
             var entradas = this.pedidoActual.getEntradas();
             entradas.add(entrada.get());
-            modelo.addAttribute("mensaje", "La entrada se agregó exitosamente al carrito");
+            modelo.addAttribute("mensaje", "La entrada '" + entrada.get().getNombre() + "' se agregó exitosamente al carrito.");
         } 
         menuEntradas(modelo);
         return "entradas";
@@ -204,7 +206,7 @@ public class controlador {
         if (!plato.isEmpty()) {
             var platos = this.pedidoActual.getPlatosFuertes();
             platos.add(plato.get());
-            modelo.addAttribute("mensaje", "El plato fuerte se agregó exitosamente al carrito");
+            modelo.addAttribute("mensaje", "El plato fuerte '"+ plato.get().getNombre() + "' se agregó exitosamente al carrito.");
         } 
         menuPlatosFuertes(modelo);
         return "platos_fuertes";
@@ -217,7 +219,7 @@ public class controlador {
         if (!postre.isEmpty()) {
             var postres = this.pedidoActual.getPostres();
             postres.add(postre.get());
-            modelo.addAttribute("mensaje", "El postre se agregó exitosamente al carrito");
+            modelo.addAttribute("mensaje", "El postre '" + postre.get().getNombre() + "' se agregó exitosamente al carrito.");
         } 
         menuPostres(modelo);
         return "postres";
@@ -230,7 +232,7 @@ public class controlador {
         if (!bebida.isEmpty()) {
             var bebidas = this.pedidoActual.getBebidas();
             bebidas.add(bebida.get());
-            modelo.addAttribute("mensaje", "La bebida se agregó exitosamente al carrito");
+            modelo.addAttribute("mensaje", "La bebida '" + bebida.get().getNombre() + "' se agregó exitosamente al carrito.");
         } 
         menuBebidas(modelo);
         return "bebidas";
@@ -243,7 +245,7 @@ public class controlador {
         if (!entrada.isEmpty()) {
             var entradas = this.pedidoActual.getEntradas();
             entradas.remove(entrada.get());
-            modelo.addAttribute("mensaje", "La entrada se eliminó del carrito. Aquí puedes escoger otras opciones de entrada.");
+            modelo.addAttribute("mensaje", "La entrada '" + entrada.get().getNombre() + "' se eliminó del carrito. Aquí puedes escoger otras opciones de entrada.");
         } 
         menuEntradas(modelo);
         return "entradas";
@@ -256,7 +258,7 @@ public class controlador {
         if (!plato.isEmpty()) {
             var platos = this.pedidoActual.getPlatosFuertes();
             platos.remove(plato.get());
-            modelo.addAttribute("mensaje", "El plato se eliminó del carrito. Aquí puedes escoger otras opciones de plato fuerte.");
+            modelo.addAttribute("mensaje", "El plato '"+ plato.get().getNombre() + "' se eliminó del carrito. Aquí puedes escoger otras opciones de plato fuerte.");
         }
         menuPlatosFuertes(modelo);
         return "platos_fuertes";
@@ -269,7 +271,7 @@ public class controlador {
         if (!postre.isEmpty()) {
             var postres = this.pedidoActual.getPostres();
             postres.remove(postre.get());
-            modelo.addAttribute("mensaje", "El postre se eliminó del carrito. Aquí puedes escoger otras opciones de postre.");
+            modelo.addAttribute("mensaje", "El postre '" + postre.get().getNombre() + "' se eliminó del carrito. Aquí puedes escoger otras opciones de postre.");
         }
         menuPostres(modelo);
         return "postres";
@@ -282,7 +284,7 @@ public class controlador {
         if (!bebida.isEmpty()) {
             var bebidas = this.pedidoActual.getBebidas();
             bebidas.remove(bebida.get());
-            modelo.addAttribute("mensaje", "La bebida se eliminó del carrito. Aquí puedes escoger otras opciones de bebida.");
+            modelo.addAttribute("mensaje", "La bebida '" + bebida.get().getNombre() + "' se eliminó del carrito. Aquí puedes escoger otras opciones de bebida.");
         }
         menuBebidas(modelo);
         return "bebidas";
@@ -296,7 +298,7 @@ public class controlador {
         if (!entrada.isEmpty()) {
             var entradas = this.pedidoActual.getEntradas();
             entradas.add(entrada.get());
-            modelo.addAttribute("mensaje", "La entrada se agregó exitosamente al carrito. Aquí puedes ver otras opciones de entrada.");
+            modelo.addAttribute("mensaje", "La entrada '" + entrada.get().getNombre() + "' se agregó exitosamente al carrito. Aquí puedes ver otras opciones de entrada.");
         } 
         menuEntradas(modelo);
         return "entradas";
@@ -309,7 +311,7 @@ public class controlador {
         if (!plato.isEmpty()) {
             var platos = this.pedidoActual.getPlatosFuertes();
             platos.add(plato.get());
-            modelo.addAttribute("mensaje", "El plato fuerte se agregó exitosamente al carrito. Aquí puedes ver otras opciones de plato fuerte.");
+            modelo.addAttribute("mensaje", "El plato fuerte '"+ plato.get().getNombre() + "' se agregó exitosamente al carrito. Aquí puedes ver otras opciones de plato fuerte.");
         } 
         
         menuPlatosFuertes(modelo);
@@ -323,7 +325,7 @@ public class controlador {
         if (!postre.isEmpty()) {
             var postres = this.pedidoActual.getPostres();
             postres.add(postre.get());
-            modelo.addAttribute("mensaje", "El postre se agregó exitosamente al carrito. Aquí puedes ver otras opciones de postre.");
+            modelo.addAttribute("mensaje", "El postre '" + postre.get().getNombre() + "' se agregó exitosamente al carrito. Aquí puedes ver otras opciones de postre.");
         } 
         
         menuPostres(modelo);
@@ -337,7 +339,7 @@ public class controlador {
         if (!bebida.isEmpty()) {
             var bebidas = this.pedidoActual.getBebidas();
             bebidas.add(bebida.get());
-            modelo.addAttribute("mensaje", "La bebida se agregó exitosamente al carrito. Aquí puedes ver otras opciones de bebida.");
+            modelo.addAttribute("mensaje", "La bebida '" + bebida.get().getNombre() + "' se agregó exitosamente al carrito. Aquí puedes ver otras opciones de bebida.");
         } 
         
         menuBebidas(modelo);
@@ -360,13 +362,15 @@ public class controlador {
 
             //Se valida si el usuario ya ingreso con su cuenta para hacer el pedido
             if (this.pedidoActual.getUsuario() == null) {
-                modelo.addAttribute("mensaje", "Debe iniciar sesión para realizar un pedido");
+                
+                modelo.addAttribute("mensaje", "No puede realizar una reserva sin iniciar sesión.");
                 inicio(modelo);
                 return "index";
             }
 
             //Se valida el dia de la reserva
             if (fechaAtencion < fechaHoy) {
+                
                 modelo.addAttribute("mensaje", "No se puede realizar la reserva porque el día de la reserva está en pasado.");
                 inicio(modelo);
                 return "index";
@@ -374,40 +378,46 @@ public class controlador {
 
             //Se valida si la reserva es para el día actual.
             if (fechaAtencion == fechaHoy) {
-                modelo.addAttribute("mensaje", "No se puede realizar una reserva para el mismo día");
+                
+                modelo.addAttribute("mensaje", "No se puede realizar una reserva para el mismo día.");
                 inicio(modelo);
                 return "index";
             }
 
             //Se valida el horario de atención del restaurante
             if(!(horaAtencion > 1029 && horaAtencion < 2031)){
-                modelo.addAttribute("mensaje", "No se puede realizar la reserva porque el horario de atención no corresponde a la hora fijada.");
+                
+                modelo.addAttribute("mensaje", "No se puede realizar la reserva porque la hora escogida no corresponde al horario de atención.");
                 inicio(modelo);
                 return "index";
             }
                         
             //Se valida si el usuario tiene un producto en el carrito
-            if (this.pedidoActual.getEntradas() != null || this.pedidoActual.getPlatosFuertes() != null ||
-                this.pedidoActual.getPostres() != null || this.pedidoActual.getBebidas() != null ) {
+            if (this.pedidoActual.getEntradas().isEmpty() && this.pedidoActual.getPlatosFuertes().isEmpty() &&
+                this.pedidoActual.getPostres().isEmpty() && this.pedidoActual.getBebidas().isEmpty() ) {
+                
+                modelo.addAttribute("mensaje", "Debe agregar un producto al carrito de compras para realizar la reserva.");
+                inicio(modelo);
+                return "index";
                     
-                    //Se agregan los datos de la reserva al pedido
-                    this.pedidoActual.setFecha_reserva(fecha);
-                    this.pedidoActual.setHora_reserva(hora);
+            } 
 
-                    //Se guarda el pedido en la base de datos
-                    pedidoServicio.guardarPedido(this.pedidoActual);
-                    modelo.addAttribute("mensaje", "El pedido se realizó exitosamente.");
+            //Si pasa todas las validaciones, se agregan los datos de la reserva al pedido
+            this.pedidoActual.setFecha_reserva(fecha);
+            this.pedidoActual.setHora_reserva(hora);
 
-                    //Se restablece el pedido
-                    var usuario = this.pedidoActual.getUsuario();
-                    this.pedidoActual = new Pedido();
-                    this.pedidoActual.setUsuario(usuario);
-            } else{
-                modelo.addAttribute("mensaje", "Debe agregar un producto al carrito de compras para realizar el pedido.");
-            }
+            //Se guarda el pedido en la base de datos
+            pedidoServicio.guardarPedido(this.pedidoActual);
+            modelo.addAttribute("mensajeOk", "El pedido se realizó exitosamente.");
+
+            //Se restablece el pedido
+            var usuario = this.pedidoActual.getUsuario();
+            this.pedidoActual = new Pedido();
+            this.pedidoActual.setUsuario(usuario);
+            
         
-        inicio(modelo);
-        return "index";
+            inicio(modelo);
+            return "index";
     }
 
 //------------------------------------Listado de pedidos-------------------------------------------------------------------
@@ -416,6 +426,7 @@ public class controlador {
     public String listarPedidos(Model modelo){
         
         var usuario = this.pedidoActual.getUsuario();
+        modelo.addAttribute("nombre", usuario.getNombre());
 
         //Se verifica si el usuario es cliente
         if(usuario.getTipoUsuario().equals("cliente")){

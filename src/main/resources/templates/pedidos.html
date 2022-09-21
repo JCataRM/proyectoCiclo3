@@ -22,13 +22,13 @@
 </head>
 <body id="body_starter">
     <section id="Orders">
-        <h1>PEDIDOS</h1>
+        <h1 th:text="${admin != null ? 'RESERVAS PENDIENTES POR ENTREGAR' : 'MIS RESERVAS'}"></h1>
         <div class="container">
             <div class="row">
                 <table class="table table-dark table-striped">
                     <thead>
                       <tr>
-                        <th scope="col"># Pedido</th>
+                        <th scope="col"># Reserva</th>
                         <th scope="col">Fecha reserva</th>
                         <th scope="col">Hora reserva</th>
                         <th scope="col">Entradas</th>

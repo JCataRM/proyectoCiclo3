@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,20 +21,20 @@
     <script defer src="../Bootstrap/bootstrap.bundle.min.js"></script>
     <script defer src="../Bootstrap/bootstrap.bundle.js.map"></script>
 </head>
+
 <body id="body_starter">
     <section id="Menu-starter">
         <h1>ENTRADAS</h1>
         <div class="container">
-            <div th:if="${mensaje != null}" >
-                <div th:text="${mensaje}" class="alert alert-warning text-dark" role="alert">
-                    Mensaje
-                </div>
+            <div th:if="${mensaje != null}" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <p th:text="${mensaje}"></p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <div class="row">
                 <div th:each="entrada: ${entradas}" class="col-12">
                     <article class="menu_starter">
                         <div class="col-md-3">
-                            <img th:src="${entrada.imagen}"/>
+                            <img th:src="${entrada.imagen}" />
                         </div>
                         <div class="col-md-9">
                             <h3 th:text="${entrada.nombre}"></h3>
@@ -46,6 +47,9 @@
             </div>
         </div>
     </section>
-    <button id="come_back" type="button" class="btn btn-outline-light" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" onclick="location.href='/#section3'">Regresar</button>
+    <button id="come_back" type="button" class="btn btn-outline-light"
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+        onclick="location.href='/#section3'">Regresar</button>
 </body>
+
 </html>

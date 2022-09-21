@@ -24,10 +24,9 @@
     <section id="Menu-starter" class="container px-4 text-center">
         <h1>POSTRES</h1>
         <div class="container">
-            <div th:if="${mensaje != null}" >
-                <div th:text="${mensaje}" class="alert alert-warning text-dark" role="alert">
-                    Mensaje
-                </div>
+            <div th:if="${mensaje != null}" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <p th:text="${mensaje}"></p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <div class="row">
                 <div th:each="postre: ${postres}" class="col-12">
