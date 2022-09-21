@@ -1,5 +1,7 @@
 package co.utp.misiontic.proyecto.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,7 @@ public class controlador {
         this.pedidoActual = new Pedido();
     }
     
-//------------------------------------------Conexión de páginas web------------------------------------
+//------------------------------------Conexión de páginas web--------------------------------------------------------------
 
     @GetMapping("/")
     public String inicio(Model modelo){
@@ -52,11 +54,18 @@ public class controlador {
             var opBebidas = this.pedidoActual.getBebidas();
             modelo.addAttribute("opBebidas", opBebidas);
         }
-    
+    //Se asigna usuario
+        if (this.pedidoActual.getUsuario() != null) {
+            modelo.addAttribute("nombreUsuario", this.pedidoActual.getUsuario().getNombre());
+        }      
+
     //Se calcula el valor total del pedido
         var total = pedidoServicio.calcularValorPedido(this.pedidoActual);
         modelo.addAttribute("total", total);
         this.pedidoActual.setPrecio_total(total);
+
+    //Prueba
+        System.out.println("Pedido -------------------> " + this.pedidoActual);
        
         return "index";
     }
@@ -99,7 +108,7 @@ public class controlador {
     }
 
     
-//-----------------------------------Cuenta del usuario----------------------------------------------
+//------------------------------------Cuenta del usuario-------------------------------------------------------------------
 
     @PostMapping("/registro")
     public String registroUsuario(@RequestParam("cedula") Integer cedula,
@@ -120,10 +129,13 @@ public class controlador {
             if(!contrasena.equals(contrasena1)){
                 modelo.addAttribute("mensaje", "Las contraseñas suministradas no son iguales. Por favor intente nuevamente.");
             }else{
-            //Si las contraseñas son iguales, se procede a crearlo en la base de datos
+                //Si las contraseñas son iguales, se procede a crearlo en la base de datos
                 var usuario = usuarioServicio.crearUsuario(cedula, nombre, telefono, correo, contrasena);
+                var nombreUsuario = usuario.getNombre();
+                //Se agrega el usuario al pedido que está abierto.
                 this.pedidoActual.setUsuario(usuario);
                 modelo.addAttribute("mensaje", "Su cuenta se ha creado exitosamente.");
+                modelo.addAttribute("nombreUsuario", nombreUsuario);
             }
         // Si el usuario existe se le muestra un mensaje de que ya tiene una cuenta
         }else {
@@ -151,20 +163,26 @@ public class controlador {
         if (!usuarioOp.get().getContrasena().equals(contrasena)) {
             modelo.addAttribute("mensaje", "El usuario o la contraseña son incorrectas");
 
-        // Se agrega el usuario al pedido que se encuentra en proceso
+        // Se agrega el usuario al pedido que se encuentra abierto
         }else{
             var usuario = usuarioOp.get();
+            var nombreUsuario = usuario.getNombre();
             this.pedidoActual.setUsuario(usuario);
+            modelo.addAttribute("nombreUsuario", nombreUsuario);
         }   
         inicio(modelo);
         return "index";
     }
     @GetMapping("/cerrar_sesion")
-    public String cerrarSesion(){
+    public String cerrarSesion(Model modelo){
+        
+        this.pedidoActual = new Pedido();
+        
+        inicio(modelo);
         return "index";
     }
 
-//------------------------------------Carrito de compras-----------------------------------------------
+//------------------------------------Carrito de compras-------------------------------------------------------------------
 
     @GetMapping("/entradas/{id}")
     public String agregarEntradaAlCarrito(@PathVariable("id") Integer id,  Model modelo){
@@ -269,7 +287,7 @@ public class controlador {
         menuBebidas(modelo);
         return "bebidas";
     }
-//------------------------------------Carrito favoritos-----------------------------------------------
+//------------------------------------Carrito favoritos--------------------------------------------------------------------
     
     @GetMapping("/favoritos_entradas/{id}")
     public String agregarFavoritosEntradaAlCarrito(@PathVariable("id") Integer id,  Model modelo){
@@ -327,27 +345,47 @@ public class controlador {
     }
 
 
-//------------------------------------Gestión de pedido-----------------------------------------------
+//------------------------------------Gestión de pedido en el carrito------------------------------------------------------
     
-    @PostMapping("/pedido")
+    @PostMapping("/carrito")
     public String guardarPedido(@RequestParam("fecha_reserva") String fecha,
         @RequestParam("hora_reserva") String hora,
         Model modelo){
-            System.out.println("Horaaaaaaaaaaaaaaaa in" + hora);
+
+            final var hoy = LocalDate.now().toString();
+
+            var fechaHoy = Integer.parseInt(hoy.substring(5, 7) + hoy.substring(8, 10));
+            var fechaAtencion = Integer.parseInt(fecha.substring(5, 7) + fecha.substring(8, 10));
+            var horaAtencion = Integer.parseInt(hora.substring(0, 2) + hora.substring(3, 5));
 
             //Se valida si el usuario ya ingreso con su cuenta para hacer el pedido
             if (this.pedidoActual.getUsuario() == null) {
                 modelo.addAttribute("mensaje", "Debe iniciar sesión para realizar un pedido");
+                inicio(modelo);
+                return "index";
+            }
+
+            //Se valida el dia de la reserva
+            if (fechaAtencion < fechaHoy) {
+                modelo.addAttribute("mensaje", "No se puede realizar la reserva porque el día de la reserva está en pasado.");
+                inicio(modelo);
+                return "index";
+            }
+
+            //Se valida si la reserva es para el día actual.
+            if (fechaAtencion == fechaHoy) {
+                modelo.addAttribute("mensaje", "No se puede realizar una reserva para el mismo día");
+                inicio(modelo);
                 return "index";
             }
 
             //Se valida el horario de atención del restaurante
-            var horaAtencion = Integer.parseInt(hora.substring(0, 1)+hora.substring(3, 4));
-            if(!(Integer.parseInt(hora)>1029 && Integer.parseInt(hora)<2031)){
-                System.out.println("Horaaaaaaaaaaaaaaaaaaaaaaa" + hora);
-                modelo.addAttribute("mensaje", "No se puede hacer la reserva porque el horario de atención no corresponde a la hora fijada.");
+            if(!(horaAtencion > 1029 && horaAtencion < 2031)){
+                modelo.addAttribute("mensaje", "No se puede realizar la reserva porque el horario de atención no corresponde a la hora fijada.");
+                inicio(modelo);
+                return "index";
             }
-            
+                        
             //Se valida si el usuario tiene un producto en el carrito
             if (this.pedidoActual.getEntradas() != null || this.pedidoActual.getPlatosFuertes() != null ||
                 this.pedidoActual.getPostres() != null || this.pedidoActual.getBebidas() != null ) {
@@ -361,13 +399,48 @@ public class controlador {
                     modelo.addAttribute("mensaje", "El pedido se realizó exitosamente.");
 
                     //Se restablece el pedido
+                    var usuario = this.pedidoActual.getUsuario();
                     this.pedidoActual = new Pedido();
-            }else{
+                    this.pedidoActual.setUsuario(usuario);
+            } else{
                 modelo.addAttribute("mensaje", "Debe agregar un producto al carrito de compras para realizar el pedido.");
             }
         
         inicio(modelo);
         return "index";
+    }
+
+//------------------------------------Listado de pedidos-------------------------------------------------------------------
+    
+    @GetMapping("/pedidos")
+    public String listarPedidos(Model modelo){
+        
+        var usuario = this.pedidoActual.getUsuario();
+
+        //Se verifica si el usuario es cliente
+        if(usuario.getTipoUsuario().equals("cliente")){
+            
+            var pedidos = pedidoServicio.listarPedidosPorCliente(usuario.getId());
+            modelo.addAttribute("pedidos", pedidos);
+
+        } 
+        //Si el usuario es administrador se ejecuta este bloque
+        else if (usuario.getTipoUsuario().equals("administrador")) {
+            
+            var pedidos = pedidoServicio.listarPedidosPorEntregar();
+            modelo.addAttribute("pedidos", pedidos);
+            modelo.addAttribute("admin", usuario.getTipoUsuario());
+        }
+
+        return "pedidos";
+    }
+
+    @GetMapping("entregar_pedido/{id}")
+    public String cambiarEstadoPedido(@PathVariable("id") Integer id, Model modelo){
+        pedidoServicio.actualizarEstadoPedido(id);
+        
+        listarPedidos(modelo);
+        return "pedidos";
     }
 
 

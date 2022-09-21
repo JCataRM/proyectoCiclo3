@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos restaurante Magic</title>
     <!--Icon tab-->
-    <link rel="shortcut icon" href="Backgrounds/utensils-solid.svg" />
+    <link rel="shortcut icon" href="../Backgrounds/utensils-solid.svg" />
     <!--File styles -->
-    <link rel="stylesheet" href="Sass/Styles.css">
+    <link rel="stylesheet" href="../Sass/Styles.css">
     <!--Files css bootstrap-->
-    <link rel="stylesheet" href="Bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="Bootstrap/bootstrap.css.map">
-    <link rel="stylesheet" href="Bootstrap/bootstrap-grid.css.map">
-    <link rel="stylesheet" href="Bootstrap/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="Bootstrap/bootstrap-reboot.rtl.min.css">
-    <link rel="stylesheet" href="Bootstrap/bootstrap-reboot.rtl.min.css.map">
+    <link rel="stylesheet" href="../Bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../Bootstrap/bootstrap.css.map">
+    <link rel="stylesheet" href="../Bootstrap/bootstrap-grid.css.map">
+    <link rel="stylesheet" href="../Bootstrap/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../Bootstrap/bootstrap-reboot.rtl.min.css">
+    <link rel="stylesheet" href="../Bootstrap/bootstrap-reboot.rtl.min.css.map">
     <!--Files js bootstrap-->
-    <script defer src="Bootstrap/bootstrap.bundle.min.js"></script>
-    <script defer src="Bootstrap/bootstrap.bundle.js.map"></script>
+    <script defer src="../Bootstrap/bootstrap.bundle.min.js"></script>
+    <script defer src="../Bootstrap/bootstrap.bundle.js.map"></script>
 </head>
 <body id="body_starter">
     <section id="Orders">
@@ -28,29 +28,28 @@
                 <table class="table table-dark table-striped">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col"># Pedido</th>
+                        <th scope="col">Fecha reserva</th>
+                        <th scope="col">Hora reserva</th>
+                        <th scope="col">Entradas</th>
+                        <th scope="col">Platos fuertes</th>
+                        <th scope="col">Postres</th>
+                        <th scope="col">Bebidas</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col" th:if="${admin != null}">Acción</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
+                      <tr th:each="pedido: ${pedidos}">
+                        <th scope="row" th:text="${pedido.id}"></th>
+                        <td th:text="${pedido.fecha_reserva}"></td>
+                        <td th:text="${pedido.hora_reserva}"></td>
+                        <td th:text="${pedido.entradas}"></td>
+                        <td th:text="${pedido.platosFuertes}"></td>
+                        <td th:text="${pedido.postres}"></td>
+                        <td th:text="${pedido.bebidas}"></td>
+                        <td th:text="${pedido.estadoPedido}"></td>
+                        <td th:if="${admin != null}"><a th:href="@{/entregar_pedido/{id}(id=${pedido.id})}">Entregar Pedido</a></td>
                       </tr>
                     </tbody>
                   </table>

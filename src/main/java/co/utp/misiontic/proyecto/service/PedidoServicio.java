@@ -53,29 +53,25 @@ public class PedidoServicio {
         var pedidos = pedidoRepositorio.findAll();
 
         var pedidosPendientes = pedidos.stream()
-            .filter(m -> m.getEstadoPedido().equals("PENDIENTE_POR_ENTREGAR")).collect(Collectors.toList());
-            System.out.println("Pedidos Pendientes -----------------> " + pedidosPendientes);
+            .filter(m -> m.getEstadoPedido().equals("Pendiente por entregar")).collect(Collectors.toList());
             return pedidosPendientes;
     }
 
-    public List<Pedido> listarPedidosPorEntregarPorCliente(Integer cedula){
+    public List<Pedido> listarPedidosPorCliente(Integer cedula){
         var pedidos = pedidoRepositorio.findAll();
 
         var pedidosPendientesPorCliente = pedidos.stream()
-            .filter(m -> m.getEstadoPedido().equals("PENDIENTE_POR_ENTREGAR"))
             .filter(m -> m.getUsuario().getId().equals(cedula))
             .collect(Collectors.toList());
         
-            System.out.println("Cedula-----------------> "+cedula + ". Pedido ------>" + pedidosPendientesPorCliente);
         return pedidosPendientesPorCliente;
     }
 
     public void actualizarEstadoPedido(Integer id){
         var pedido = pedidoRepositorio.findById(id).get();
 
-        pedido.setEstadoPedido("ENTREGADO");
+        pedido.setEstadoPedido("Entregado");
         pedidoRepositorio.save(pedido);
     }
-
-    
+   
 }

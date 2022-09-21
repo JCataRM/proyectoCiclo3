@@ -21,8 +21,11 @@ public class OpcionEntrada implements Serializable{
     private String descripcion;
     private String imagen;
     private Integer precio;
+    
+    @Override
+    public String toString() {
+        return  nombre + ". ";
+    }
 
-    /* @ManyToMany(mappedBy = "entradas")
-    private List<Pedido> pedidos; */
-
+    
 }

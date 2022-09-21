@@ -41,13 +41,11 @@
             <a class="nav-link active" aria-current="page" href="/">Inicio</a>
             <a class="nav-link" href="#section3">Menú</a>
             <a class="nav-link" href="#section2">Sobre nosotros</a>
-            <a class="nav-link" th:href="${nombre != null ? 'cerrar_sesion' : '#' }" id="sign_in" th:data-bs-toggle="${nombre != null ? '' : 'modal' }" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" th:text="${nombre != null ? 'Cerrar sesión' : 'Mi cuenta' }"></a>
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Hola ${Nombre}
-            </a>
+            <a class="nav-link" th:if="${nombreUsuario == null}" href="#" id="sign_in" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Mi cuenta</a>
+            <a class="nav-link dropdown-toggle" th:if="${nombreUsuario != null}" href="#" th:text="'Hola ' + ${nombreUsuario}" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="pedidos">Ver pedidos</a></li>
-              <li><a class="dropdown-item" href="#">Cerrar</a></li>
+              <li><a class="dropdown-item" href="/cerrar_sesion">Cerrar</a></li>
             </ul>
             <a class="nav-link" href="#" id="shopping cart" data-bs-toggle="modal" data-bs-target="#exampleModal1">
               <i class="fa-solid fa-cart-shopping"></i>
@@ -80,7 +78,7 @@
               <p>Si aún no está registrado y desea hacerlo, haga clic <a id="registration"
                   href="form_registration">AQUÍ</a></p>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="submit" class="btn btn-primary">Ir a mi cuenta</button>
           </form>
         </div>
       </div>
@@ -124,7 +122,7 @@
           <a th:href="@{/eliminar_bebida/{id}(id=${bebida.id})}">Eliminar</a>
         </div>
         <!-- Datos de la reserva -->
-        <form action="/pedido" method="post">
+        <form action="/carrito" method="post">
           <div id="reservation">
             <h2 th:text="'Valor total a pagar: $' + ${total}"></h2>
             <label for="fecha_reserva" class="form-label">Fecha de la reserva:</label>
@@ -224,7 +222,7 @@
               <p class="text">Esponjoso cupcake de banano, relleno de salsa de chocolate y milo, decorado por encima con
                 crema inglesa, baileys y grageas de colores.</p>
               <p class="price">Costo: $15.000</p>
-              <button class="favorite_button" onclick="location.href='/favoritos_postre/6'">Añadir al carrito</button>
+              <button class="favorite_button" onclick="location.href='/favoritos_postres/6'">Añadir al carrito</button>
             </article>
             <article>
               <img src="images/plato6.jpg" class="d-block w-100" alt="imagen pizza">
@@ -267,7 +265,7 @@
             </article>
             <article>
               <img src="images/plato4.jpg" class="d-block w-100" alt="imagen pizza">
-              <h3>Costilla de cerdo en salsa bbq.</h3>
+              <h3>Costilla bbq</h3>
               <p class="text">300 gr de deliciosa costilla de cerdo asada, acompañada de papas a las francesa ensalada
                 de vegetales y porción de arroz adicional.</p>
               <p class="price">Costo: $35.000</p>

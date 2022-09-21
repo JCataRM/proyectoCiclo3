@@ -7,16 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
-import co.utp.misiontic.proyecto.model.entity.OpcionBebida;
-import co.utp.misiontic.proyecto.model.entity.OpcionEntrada;
-import co.utp.misiontic.proyecto.model.entity.OpcionPlatoFuerte;
-import co.utp.misiontic.proyecto.model.entity.OpcionPostre;
-import co.utp.misiontic.proyecto.repository.BebidaRepositorio;
-import co.utp.misiontic.proyecto.repository.EntradaRepositorio;
-import co.utp.misiontic.proyecto.repository.PlatoFuerteRepositorio;
-import co.utp.misiontic.proyecto.repository.PostreRepositorio;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import co.utp.misiontic.proyecto.model.entity.*;
+import co.utp.misiontic.proyecto.repository.*;
+import lombok.*;
 
 @SpringBootApplication
 public class ProyectoApplication {

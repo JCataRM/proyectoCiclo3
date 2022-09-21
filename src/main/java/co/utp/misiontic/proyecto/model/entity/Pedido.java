@@ -52,7 +52,7 @@ public class Pedido implements Serializable{
 
     
     public Pedido() {
-        this.estadoPedido = "PENDIENTE_POR_ENTREGAR";
+        this.estadoPedido = "Pendiente por entregar";
         this.entradas = new ArrayList<>();
         this.platosFuertes = new ArrayList<>();
         this.postres = new ArrayList<>();

@@ -22,4 +22,9 @@ public class OpcionPostre implements Serializable{
     private String imagen;
     private Integer precio;
 
+    @Override
+    public String toString() {
+        return  nombre + ". ";
+    }
+
 }
