@@ -97,6 +97,13 @@
 //Modal shopping cart
 #exampleModal1 {
     .modal-body {
+        img {
+            height: 30vh;
+            width: 50%!important;
+            border-radius: 5px;
+            box-shadow: 1px 4px 5px 0px rgb(0 0 0 / 75%);
+            margin: auto;
+        }
         h3 {
             margin-top: 3%;
             font-size: 20px;
@@ -124,6 +131,11 @@
             color: deepskyblue;
             background: aliceblue;
         }
+        p {
+            padding: 3%;
+            font-family: cursive;
+            color: brown;
+        }
     }
     .modal-footer {
         .btn.btn-primary {
@@ -132,6 +144,19 @@
                 text-decoration: none;
             }
         }
+    }
+}
+
+//Alerts
+body {
+    position: relative;
+    .alert.alert-danger.alert-dismissible.fade.show {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        top: 3%;
+        height: 3rem;
+        padding-bottom: 3%;
     }
 }
 
@@ -191,7 +216,7 @@
         content: '';
         position: absolute;
         background-color: rgba(0,0,0,0.2);
-        height: 66.8%;
+        height: 64.5%;
         width: 100%;
         bottom: 28px;
         left: 0;
@@ -200,6 +225,9 @@
         padding: 3%;
         h2 {
             font-weight: bold;
+        }
+        p {
+            text-align: justify;
         }
     }
     img {
@@ -448,14 +476,24 @@
 
 //Whatsapp button
 #wp_button {
+    padding: 0.6%;
+    width: 4%;
     background: lawngreen;
-    border-color: transparent;
+    border: solid 1px white;
     border-radius: 50%;
     display: flex;
+    justify-content: center;
     position: fixed;
     bottom: 0;
     right: 0;
     margin: 1%;
+    &:hover {
+        background: #66952E;
+        border: solid 1px orange;
+        .link_wp i {
+            color: orange;
+        }
+    }
     .link_wp {
         i {
             color: white;
@@ -463,4 +501,26 @@
         }
     }
 }
+
+//Orders page
+#orders_body {
+    background-image: url('../Backgrounds/fondo1.jpg');
+    position: relative;
+    &::before {
+        content: '';
+        height: 212%;
+        position: absolute;
+        width: 100%;
+        background-color: rgba(0,0,0,0.6);
+    }
+    #Orders {
+        z-index: 1;
+        position: relative;
+        h1 {
+            padding: 2%;
+            text-align: center;
+        }
+    }
+}
+
 
