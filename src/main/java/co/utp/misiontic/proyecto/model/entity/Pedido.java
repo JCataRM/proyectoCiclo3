@@ -47,7 +47,8 @@ public class Pedido implements Serializable{
     @ManyToMany
     @JoinTable(name="seleccion_bebida",
         joinColumns = @JoinColumn(name="id_pedido"),
-        inverseJoinColumns = @JoinColumn(name="id_bebidas"))
+        inverseJoinColumns = @JoinColumn(name="id_bebidas")
+        )
     private List<OpcionBebida> bebidas;
 
     

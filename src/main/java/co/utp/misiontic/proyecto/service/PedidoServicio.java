@@ -26,23 +26,22 @@ public class PedidoServicio {
     }
 
     public void guardarPedido(Pedido pedido){
-
         pedidoRepositorio.save(pedido);
     }
 
     public Integer calcularValorPedido(Pedido pedido){
         var valorTotal = 0;
 
-        var entradas = pedido.getEntradas().stream().map(m -> m.getPrecio()).collect(Collectors.toList());
+        var entradas = pedido.getEntradas().stream().map(m -> m.getPrecio()*m.getCantidad()).collect(Collectors.toList());
         valorTotal += entradas.stream().reduce(0, (a, b) -> a + b);
 
-        var platos = pedido.getPlatosFuertes().stream().map(m -> m.getPrecio()).collect(Collectors.toList());
+        var platos = pedido.getPlatosFuertes().stream().map(m -> m.getPrecio()*m.getCantidad()).collect(Collectors.toList());
         valorTotal += platos.stream().reduce(0, (a, b) -> a + b);
 
-        var postres = pedido.getPostres().stream().map(m -> m.getPrecio()).collect(Collectors.toList());
+        var postres = pedido.getPostres().stream().map(m -> m.getPrecio()*m.getCantidad()).collect(Collectors.toList());
         valorTotal += postres.stream().reduce(0, (a, b) -> a + b);
 
-        var bebidas = pedido.getBebidas().stream().map(m -> m.getPrecio()).collect(Collectors.toList());
+        var bebidas = pedido.getBebidas().stream().map(m -> m.getPrecio()*m.getCantidad()).collect(Collectors.toList());
         valorTotal += bebidas.stream().reduce(0, (a, b) -> a + b);
 
 

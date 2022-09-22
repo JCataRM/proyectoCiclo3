@@ -21,10 +21,11 @@ public class OpcionPostre implements Serializable{
     private String descripcion;
     private String imagen;
     private Integer precio;
+    private Integer cantidad;
 
     @Override
     public String toString() {
-        return  nombre + ". ";
+        return  nombre + ". Cantidad: " + cantidad;
     }
 
 }

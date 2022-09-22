@@ -1,6 +1,7 @@
 package co.utp.misiontic.proyecto.controller;
 
 import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -188,55 +189,119 @@ public class controlador {
 
     @GetMapping("/entradas/{id}")
     public String agregarEntradaAlCarrito(@PathVariable("id") Integer id,  Model modelo){
-        
+        //Se obtiene la lista de entradas que seleccionó el usuario y la entrada que entra como parámetro
+        var entradas = this.pedidoActual.getEntradas();
         var entrada = this.entradaServicio.obtenerEntrada(id);
+        
+        //Se valida si existe un producto con ese id.
         if (!entrada.isEmpty()) {
-            var entradas = this.pedidoActual.getEntradas();
-            entradas.add(entrada.get());
-            modelo.addAttribute("mensaje", "La entrada '" + entrada.get().getNombre() + "' se agregó exitosamente al carrito.");
-        } 
+
+        //Se consulta si el producto ya está en la lista
+        var entradaLista = entradas.stream().filter(m -> m.getId() == id).findFirst();
+
+            //Si el producto NO está, se adiciona a la lista.
+            if (entradaLista.isEmpty()) {
+                    entradas.add(entrada.get());
+                    modelo.addAttribute("mensaje", "La entrada '" + entrada.get().getNombre() + "' se agregó exitosamente al carrito.");
+                }
+            //Si el producto está en la lista, se le adiciona una cantidad.
+            else{
+                agregarEntrada(id, modelo);
+            }
+        } else{
+            modelo.addAttribute("mensaje", "No existe un producto con esa referencia. Por favor intenta nuevamente");
+        }
+                
         menuEntradas(modelo);
         return "entradas";
     } 
-    
+
     @GetMapping("/platos_fuertes/{id}")
     public String agregarPlatoAlCarrito(@PathVariable("id") Integer id,  Model modelo){
-        
+        //Se obtiene la lista de platos que seleccionó el usuario y el plato que entra como parámetro
+        var platos = this.pedidoActual.getPlatosFuertes();
         var plato = this.platoFuerteServicio.obtenerPlatoFuerte(id);
+        
+        //Se valida si existe un producto con ese id.
         if (!plato.isEmpty()) {
-            var platos = this.pedidoActual.getPlatosFuertes();
-            platos.add(plato.get());
-            modelo.addAttribute("mensaje", "El plato fuerte '"+ plato.get().getNombre() + "' se agregó exitosamente al carrito.");
-        } 
+
+        //Se consulta si el producto ya está en la lista
+        var platoLista = platos.stream().filter(m -> m.getId() == id).findFirst();
+
+            //Si el producto NO está, se adiciona a la lista.
+            if (platoLista.isEmpty()) {
+                    platos.add(plato.get());
+                    modelo.addAttribute("mensaje", "El plato fuerte '" + plato.get().getNombre() + "' se agregó exitosamente al carrito.");
+                }
+            //Si el producto está en la lista, se le adiciona una cantidad.
+            else{
+                agregarPlato(id, modelo);
+            }
+        } else{
+            modelo.addAttribute("mensaje", "No existe un producto con esa referencia. Por favor intenta nuevamente");
+        }        
+        
         menuPlatosFuertes(modelo);
         return "platos_fuertes";
-    }   
+    } 
 
     @GetMapping("/postres/{id}")
-    public String agregarPostreAlCarrito(@PathVariable("id") Integer id,  Model modelo){
-        
+    public String agregarPostresAlCarrito(@PathVariable("id") Integer id,  Model modelo){
+        //Se obtiene la lista de postres que seleccionó el usuario y el postre que entra como parámetro
+        var postres = this.pedidoActual.getPostres();
         var postre = this.postreServicio.obtenerPostre(id);
+        
+        //Se valida si existe un producto con ese id.
         if (!postre.isEmpty()) {
-            var postres = this.pedidoActual.getPostres();
-            postres.add(postre.get());
-            modelo.addAttribute("mensaje", "El postre '" + postre.get().getNombre() + "' se agregó exitosamente al carrito.");
+
+        //Se consulta si el producto ya está en la lista
+        var postreLista = postres.stream().filter(m -> m.getId() == id).findFirst();
+
+            //Si el producto NO está, se adiciona a la lista.
+            if (postreLista.isEmpty()) {
+                    postres.add(postre.get());
+                    modelo.addAttribute("mensaje", "El postre '" + postre.get().getNombre() + "' se agregó exitosamente al carrito.");
+                }
+            //Si el producto está en la lista, se le adiciona una cantidad.
+            else{
+                agregarPostre(id, modelo);
+            }
+        } else{
+            modelo.addAttribute("mensaje", "No existe un producto con esa referencia. Por favor intenta nuevamente");
         } 
+
         menuPostres(modelo);
         return "postres";
-    }
+    } 
 
     @GetMapping("/bebidas/{id}")
     public String agregarBebidaAlCarrito(@PathVariable("id") Integer id,  Model modelo){
-        
+        //Se obtiene la lista de bebidas que seleccionó el usuario y la bebida que entra como parámetro
+        var bebidas = this.pedidoActual.getBebidas();
         var bebida = this.bebidaServicio.obtenerBebida(id);
+        
+        //Se valida si existe un producto con ese id.
         if (!bebida.isEmpty()) {
-            var bebidas = this.pedidoActual.getBebidas();
-            bebidas.add(bebida.get());
-            modelo.addAttribute("mensaje", "La bebida '" + bebida.get().getNombre() + "' se agregó exitosamente al carrito.");
-        } 
+
+        //Se consulta si el producto ya está en la lista
+        var bebidaLista = bebidas.stream().filter(m -> m.getId() == id).findFirst();
+
+            //Si el producto NO está, se adiciona a la lista.
+            if (bebidaLista.isEmpty()) {
+                bebidas.add(bebida.get());
+                    modelo.addAttribute("mensaje", "La bebida '" + bebida.get().getNombre() + "' se agregó exitosamente al carrito.");
+                } 
+            //Si el producto está en la lista, se le adiciona una cantidad.
+            else{
+                agregarBebida(id, modelo);
+            }
+        } else{
+            modelo.addAttribute("mensaje", "No existe un producto con esa referencia. Por favor intenta nuevamente");
+        }
+                
         menuBebidas(modelo);
         return "bebidas";
-    }
+    } 
 
     @GetMapping("/eliminar_entrada/{id}")
     public String eliminarEntradaDeCarrito(@PathVariable("id") Integer id, Model modelo){
@@ -399,7 +464,6 @@ public class controlador {
                 modelo.addAttribute("mensaje", "Debe agregar un producto al carrito de compras para realizar la reserva.");
                 inicio(modelo);
                 return "index";
-                    
             } 
 
             //Si pasa todas las validaciones, se agregan los datos de la reserva al pedido
@@ -418,6 +482,161 @@ public class controlador {
         
             inicio(modelo);
             return "index";
+    }
+    @GetMapping("/agregar_entrada/{id}")
+    public String agregarEntrada(@PathVariable("id") Integer id, Model modelo){
+
+        var entradas = this.pedidoActual.getEntradas();
+        var entrada = entradas.stream().filter(m -> m.getId() == id).findFirst().get();
+        var posicion = entradas.indexOf(entrada);
+        var cantidadNueva = entrada.getCantidad() + 1;
+        
+        entrada.setCantidad(cantidadNueva);
+        entradas.set(posicion, entrada);
+        
+        modelo.addAttribute("mensaje", "La entrada '" + entrada.getNombre() + "' se le adicionó una unidad. Aquí puedes ver otras opciones de entrada.");
+        menuEntradas(modelo);
+        return "entradas";
+    }
+
+    @GetMapping("/agregar_plato/{id}")
+    public String agregarPlato(@PathVariable("id") Integer id, Model modelo){
+
+        var platos = this.pedidoActual.getPlatosFuertes();
+        var plato = platos.stream().filter(m -> m.getId() == id).findFirst().get();
+        var posicion = platos.indexOf(plato);
+        var cantidadNueva = plato.getCantidad() + 1;
+
+        plato.setCantidad(cantidadNueva);
+        platos.set(posicion, plato);
+        
+        modelo.addAttribute("mensaje", "El plato fuerte '" + plato.getNombre() + "' se le adicionó una unidad. Aquí puedes ver otras opciones de plato fuerte.");
+        menuPlatosFuertes(modelo);
+        return "platos_fuertes";
+    }
+
+    @GetMapping("/agregar_postre/{id}")
+    public String agregarPostre(@PathVariable("id") Integer id, Model modelo){
+
+        var postres = this.pedidoActual.getPostres();
+        var postre = postres.stream().filter(m -> m.getId() == id).findFirst().get();
+        var posicion = postres.indexOf(postre);
+        var cantidadNueva = postre.getCantidad() + 1;
+
+        postre.setCantidad(cantidadNueva);
+        postres.set(posicion, postre);
+        
+        modelo.addAttribute("mensaje", "El postre '" + postre.getNombre() + "' se le adicionó una unidad. Aquí puedes ver otras opciones de postre.");
+        menuPostres(modelo);
+        return "postres";
+    }
+
+    @GetMapping("/agregar_bebida/{id}")
+    public String agregarBebida(@PathVariable("id") Integer id, Model modelo){
+
+        var bebidas = this.pedidoActual.getBebidas();
+        var bebida = bebidas.stream().filter(m -> m.getId() == id).findFirst().get();
+        var posicion = bebidas.indexOf(bebida);
+        var cantidadNueva = bebida.getCantidad() + 1;
+
+        bebida.setCantidad(cantidadNueva);
+        bebidas.set(posicion, bebida);
+        
+        modelo.addAttribute("mensaje", "La bebida '" + bebida.getNombre() + "' se le adicionó una unidad. Aquí puedes ver otras opciones de bebida.");
+        menuBebidas(modelo);
+        return "bebidas";
+    }
+
+    @GetMapping("/disminuir_entrada/{id}")
+    public String disminuirEntrada(@PathVariable("id") Integer id, Model modelo){
+
+        var entradas = this.pedidoActual.getEntradas();
+        var entrada = entradas.stream().filter(m -> m.getId() == id).findFirst().get();
+        
+        //Se evalua la cantidad del producto
+        if(entrada.getCantidad() > 1){
+            var posicion = entradas.indexOf(entrada);
+            var cantidadNueva = entrada.getCantidad() - 1;
+
+            entrada.setCantidad(cantidadNueva);
+            entradas.set(posicion, entrada);
+            modelo.addAttribute("mensaje", "Se eliminó una unidad de la entrada '" + entrada.getNombre() + "'. Aquí puedes ver otras opciones de entrada.");
+            
+        } else{
+            eliminarEntradaDeCarrito(id, modelo);
+        }
+
+        menuEntradas(modelo);
+            return "entradas";
+    }
+
+    @GetMapping("/disminuir_plato/{id}")
+    public String disminuirPlato(@PathVariable("id") Integer id, Model modelo){
+
+        var platos = this.pedidoActual.getPlatosFuertes();
+        var plato = platos.stream().filter(m -> m.getId() == id).findFirst().get();
+        
+        //Se evalua la cantidad del producto
+        if(plato.getCantidad() > 1){
+            var posicion = platos.indexOf(plato);
+            var cantidadNueva = plato.getCantidad() - 1;
+
+            plato.setCantidad(cantidadNueva);
+            platos.set(posicion, plato);
+            modelo.addAttribute("mensaje", "Se eliminó una unidad del plato fuerte '" + plato.getNombre() + "'. Aquí puedes ver otras opciones de plato fuerte.");
+
+        } else{
+            eliminarPlatoDeCarrito(id, modelo);
+        }
+
+        menuEntradas(modelo);
+            return "entradas";
+    }
+
+    @GetMapping("/disminuir_postre/{id}")
+    public String disminuirPostre(@PathVariable("id") Integer id, Model modelo){
+
+        var postres = this.pedidoActual.getPostres();
+        var postre = postres.stream().filter(m -> m.getId() == id).findFirst().get();
+        
+        //Se evalua la cantidad del producto
+        if(postre.getCantidad() > 1){
+            var posicion = postres.indexOf(postre);
+            var cantidadNueva = postre.getCantidad() - 1;
+
+            postre.setCantidad(cantidadNueva);
+            postres.set(posicion, postre);
+            modelo.addAttribute("mensaje", "Se eliminó una unidad del postre '" + postre.getNombre() + "'. Aquí puedes ver otras opciones de postre.");
+
+        } else{
+            eliminarPostreDeCarrito(id, modelo);
+        }
+
+        menuPostres(modelo);
+            return "postres";
+    }
+
+    @GetMapping("/disminuir_bebida/{id}")
+    public String disminuirBebida(@PathVariable("id") Integer id, Model modelo){
+
+        var bebidas = this.pedidoActual.getBebidas();
+        var bebida = bebidas.stream().filter(m -> m.getId() == id).findFirst().get();
+        
+        //Se evalua la cantidad del producto
+        if(bebida.getCantidad() > 1){
+            var posicion = bebidas.indexOf(bebida);
+            var cantidadNueva = bebida.getCantidad() - 1;
+
+            bebida.setCantidad(cantidadNueva);
+            bebidas.set(posicion, bebida);
+            modelo.addAttribute("mensaje", "Se eliminó una unidad de la bebida '" + bebida.getNombre() + "'. Aquí puedes ver otras opciones de bebida.");
+
+        } else{
+            eliminarBebidaDeCarrito(id, modelo);
+        }
+
+        menuBebidas(modelo);
+            return "bebidas";
     }
 
 //------------------------------------Listado de pedidos-------------------------------------------------------------------

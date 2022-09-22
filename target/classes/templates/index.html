@@ -100,6 +100,9 @@
           <h3 th:text="${entrada.nombre}"></h3>
           <p class="text" th:text="${entrada.descripcion}"></p>
           <p class="price" th:text="'Costo: $' + ${entrada.precio}"></p>
+          <span th:text="'Cantidad: ' + ${entrada.cantidad}"></span>
+          <a th:href="@{/agregar_entrada/{id}(id=${entrada.id})}">+</a>
+          <a th:href="@{/disminuir_entrada/{id}(id=${entrada.id})}">-</a>
           <a th:href="@{/eliminar_entrada/{id}(id=${entrada.id})}">Eliminar</a>
         </div>
         <div th:each="plato: ${opPlatos}" class="modal-body">
@@ -107,6 +110,9 @@
           <h3 th:text="${plato.nombre}"></h3>
           <p class="text" th:text="${plato.descripcion}"></p>
           <p class="price" th:text="'Costo: $' + ${plato.precio}"></p>
+          <span th:text="'Cantidad: ' + ${plato.cantidad}"></span>
+          <a th:href="@{/agregar_plato/{id}(id=${plato.id})}">+</a>
+          <a th:href="@{/disminuir_plato/{id}(id=${plato.id})}">-</a>
           <a th:href="@{/eliminar_plato_fuerte/{id}(id=${plato.id})}">Eliminar</a>
         </div>
         <div th:each="postre: ${opPostres}" class="modal-body">
@@ -114,6 +120,9 @@
           <h3 th:text="${postre.nombre}"></h3>
           <p class="text" th:text="${postre.descripcion}"></p>
           <p class="price" th:text="'Costo: $' + ${postre.precio}"></p>
+          <span th:text="'Cantidad: ' + ${postre.cantidad}"></span>
+          <a th:href="@{/agregar_postre/{id}(id=${postre.id})}">+</a>
+          <a th:href="@{/disminuir_postre/{id}(id=${postre.id})}">-</a>
           <a th:href="@{/eliminar_postre/{id}(id=${postre.id})}">Eliminar</a>
         </div>
         <div th:each="bebida: ${opBebidas}" class="modal-body">
@@ -121,6 +130,9 @@
           <h3 th:text="${bebida.nombre}"></h3>
           <p class="text" th:text="${bebida.descripcion}"></p>
           <p class="price" th:text="'Costo: $' + ${bebida.precio}"></p>
+          <span th:text="'Cantidad: ' + ${bebida.cantidad}"></span>
+          <a th:href="@{/agregar_bebida/{id}(id=${bebida.id})}">+</a>
+          <a th:href="@{/disminuir_bebida/{id}(id=${bebida.id})}">-</a>
           <a th:href="@{/eliminar_bebida/{id}(id=${bebida.id})}">Eliminar</a>
         </div>
         <!-- Datos de la reserva -->
