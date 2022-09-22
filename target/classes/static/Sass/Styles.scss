@@ -103,17 +103,42 @@
             border-radius: 5px;
             box-shadow: 1px 4px 5px 0px rgb(0 0 0 / 75%);
             margin: auto;
+            &:hover {
+                filter: contrast(0.5);
+                transform: scale(1.1);
+            }
         }
         h3 {
             margin-top: 3%;
             font-size: 20px;
+            font-weight: bold;
             font-family: cursive;
         }
         .price {
             color: darkgray;
+            margin: 0;
+        }
+        .amount {
+            padding-bottom: 4%;
+            span {
+                font-family: cursive;
+                background: antiquewhite;
+            }
+            a {
+                font-size: 25px;
+                font-weight: bold;
+                text-decoration: none;
+                color: brown;
+            }
+            .plus_amount {
+                margin-left: 2%;
+            }
         }
         a {
             color: deepskyblue;
+            &:hover {
+                color: purple;
+            }
         }
     }
     #reservation {

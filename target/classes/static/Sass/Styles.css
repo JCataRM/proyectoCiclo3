@@ -76,16 +76,41 @@
   box-shadow: 1px 4px 5px 0px rgba(0, 0, 0, 0.75);
   margin: auto;
 }
+#exampleModal1 .modal-body img:hover {
+  filter: contrast(0.5);
+  transform: scale(1.1);
+}
 #exampleModal1 .modal-body h3 {
   margin-top: 3%;
   font-size: 20px;
+  font-weight: bold;
   font-family: cursive;
 }
 #exampleModal1 .modal-body .price {
   color: darkgray;
+  margin: 0;
+}
+#exampleModal1 .modal-body .amount {
+  padding-bottom: 4%;
+}
+#exampleModal1 .modal-body .amount span {
+  font-family: cursive;
+  background: antiquewhite;
+}
+#exampleModal1 .modal-body .amount a {
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  color: brown;
+}
+#exampleModal1 .modal-body .amount .plus_amount {
+  margin-left: 2%;
 }
 #exampleModal1 .modal-body a {
   color: deepskyblue;
+}
+#exampleModal1 .modal-body a:hover {
+  color: purple;
 }
 #exampleModal1 #reservation h2 {
   text-align: center;
