@@ -69,6 +69,13 @@
   padding: 3% 0;
 }
 
+#exampleModal1 .modal-body img {
+  height: 30vh;
+  width: 50% !important;
+  border-radius: 5px;
+  box-shadow: 1px 4px 5px 0px rgba(0, 0, 0, 0.75);
+  margin: auto;
+}
 #exampleModal1 .modal-body h3 {
   margin-top: 3%;
   font-size: 20px;
@@ -94,9 +101,26 @@
   color: deepskyblue;
   background: aliceblue;
 }
+#exampleModal1 #reservation p {
+  padding: 3%;
+  font-family: cursive;
+  color: brown;
+}
 #exampleModal1 .modal-footer .btn.btn-primary .order_button {
   color: white;
   text-decoration: none;
+}
+
+body {
+  position: relative;
+}
+body .alert.alert-danger.alert-dismissible.fade.show {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  top: 3%;
+  height: 3rem;
+  padding-bottom: 3%;
 }
 
 #section1 {
@@ -153,7 +177,7 @@
   content: "";
   position: absolute;
   background-color: rgba(0, 0, 0, 0.2);
-  height: 66.8%;
+  height: 64.5%;
   width: 100%;
   bottom: 28px;
   left: 0;
@@ -163,6 +187,9 @@
 }
 #section2 article h2 {
   font-weight: bold;
+}
+#section2 article p {
+  text-align: justify;
 }
 #section2 img {
   width: 100%;
@@ -393,16 +420,50 @@
 }
 
 #wp_button {
+  padding: 0.6%;
+  width: 4%;
   background: lawngreen;
-  border-color: transparent;
+  border: solid 1px white;
   border-radius: 50%;
   display: flex;
+  justify-content: center;
   position: fixed;
   bottom: 0;
   right: 0;
   margin: 1%;
 }
+#wp_button:hover {
+  background: #66952E;
+  border: solid 1px orange;
+}
+#wp_button:hover .link_wp i {
+  color: orange;
+}
 #wp_button .link_wp i {
   color: white;
   font-size: 30px;
+}
+
+#orders_body {
+  background-image: url("../Backgrounds/fondo1.jpg");
+  position: relative;
+}
+#orders_body::before {
+  content: "";
+  height: 212%;
+  position: absolute;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#orders_body #Orders {
+  z-index: 1;
+  position: relative;
+}
+#orders_body #Orders h1 {
+  padding: 2%;
+  text-align: center;
+}
+#orders_body button {
+  position: relative;
+  left: 5%;
 }/*# sourceMappingURL=Styles.css.map */

@@ -46,7 +46,7 @@
             <a class="nav-link dropdown-toggle" th:if="${nombreUsuario != null}" href="#"
               th:text="'Hola ' + ${nombreUsuario}" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="pedidos">Ver reservas</a></li>
+              <li><a class="dropdown-item" href="pedidos" target="_blank">Ver reservas</a></li>
               <li><a class="dropdown-item" href="/cerrar_sesion">Cerrar</a></li>
             </ul>
             <a class="nav-link" href="#" id="shopping cart" data-bs-toggle="modal" data-bs-target="#exampleModal1">
@@ -156,17 +156,6 @@
     </div>
   </div>
 
-  <!-- Alertas -->
-  <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${mensaje != null}">
-    <br><br><br>
-    <strong>Ups, tenemos un problema! </strong> <span th:text="${mensaje}"></span>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${mensajeOk != null}">
-    <br><br><br>
-    <strong>Excelente! </strong> <span th:text="${mensajeOk}"></span>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
 
   <section id="section1">
     <h1 id="p_title">Bienvenidos al restaurante Magic!</h1>
@@ -185,13 +174,15 @@
   <section id="section2">
     <article>
       <h2>Sobre nosotros</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis magna laoreet ante luctus
-        placerat. Donec sed nulla dictum, tristique nibh sit amet, ultricies dolor. Proin efficitur porta
-        nulla, sit amet congue risus commodo at. Duis semper consectetur luctus. In hac habitasse platea
-        dictumst. Nunc venenatis tristique odio ultricies porttitor. Donec vel lacus eget eros consectetur
-        pellentesque. Vestibulum eget interdum felis. Praesent mattis iaculis tortor et pulvinar. Praesent
-        et sagittis arcu. Sed tincidunt egestas nibh ac aliquet. Praesent non leo a lorem scelerisque
-        bibendum.</p>
+      <p>Magic ha nacido para alegrarte el paladar, con una propuesta gastronomica que no podrás dejar de degustar,
+        queremos ser un restaurante donde te guste comer y donde te guste estar. Para ello, disponemos de un espacio
+        funcional, luminoso y elegante, de esta manera puedes hacer reservas para una fecha especial o simplemente
+        para ahorrarte tiempo de espera y que al llegar ya tengas todo servido en la mesa que reservaste
+        por medio de nuestra página web.
+        Nuestra propuesta gastronómica ofrece varias alternativas, siempre de la misma calidad. Con el menú hemos 
+        reinventar una apuesta tradicional sin perder la esencia. En la carta hemos dado rienda suelta a nuestra
+        imaginación y a nuestro deseo de innovar.
+        Podríamos seguir hablando de nosotros, pero Magic ya ha abierto sus puertas y te invitamos a que pases. 
     </article>
     <img src="Backgrounds/imagenes/imagenes/chef-5993951_1920_1.jpg" />
   </section>
@@ -350,8 +341,16 @@
           target="_blank">AQUÍ</a></p>
     </div>
   </footer>
-  <button id="wp_button"><a class="link_wp" href="https://web.whatsapp.com"><i
-        class="fa-brands fa-whatsapp"></i></a></button>
-</body>
+  <button id="wp_button"><a class="link_wp" href="https://web.whatsapp.com"><i class="fa-brands fa-whatsapp"></i></a></button>
 
+    <!-- Alerts -->
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${mensaje != null}">
+      <strong>Ups, tenemos un problema! </strong> <span th:text="${mensaje}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${mensajeOk != null}">
+      <strong>Excelente! </strong> <span th:text="${mensajeOk}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</body>
 </html>
