@@ -28,6 +28,11 @@
                 <p th:text="${mensaje}"></p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+            <div th:if="${mensajeLimite != null}" class="alert alert-danger alert-dismissible" role="alert">
+                <strong>Ups, tenemos un problema! </strong> <span th:text="${mensajeLimite}"></span>
+                <p><strong>Importante: </strong>Si requiere un pedido más extenso, por favor comuníquese con la administración.</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <div class="row">
                 <div th:each="bebida: ${bebidas}" class="col-12">
                     <article class="menu_starter">

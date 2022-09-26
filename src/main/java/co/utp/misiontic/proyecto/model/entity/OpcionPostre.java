@@ -25,7 +25,7 @@ public class OpcionPostre implements Serializable{
 
     @Override
     public String toString() {
-        return  nombre + ". Cantidad: " + cantidad;
+        return  nombre + " -> cantidad: " + cantidad + ". ";
     }
 
 }

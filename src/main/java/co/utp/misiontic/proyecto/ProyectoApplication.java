@@ -30,10 +30,10 @@ public class ProyectoApplication {
 
 		@Override
 		public void run(String... args) throws Exception {
-			cargarEntradas();
-			cargarPlatos();
-			cargarPostres();
-			cargarBebidas();
+			//cargarEntradas();
+			//cargarPlatos();
+			//cargarPostres();
+			//cargarBebidas();
 			
 		}
 
@@ -73,7 +73,7 @@ public class ProyectoApplication {
 		private void cargarBebidas(){
 			bebidaRepositorio.saveAll(Arrays.asList(
 				new OpcionBebida(1, "Vino tinto", "Copa de vino tinto de la mejor selección de vinos", "/images/bebida1.jpg", 12_000, 1),
-				new OpcionBebida(2, "Bebida de limón y cereza.", "Azucar, agua, zumo de limón con trozos de cereza.", "/images/bebida2.jpg", 10_000, 1),
+				new OpcionBebida(2, "Bebida de limón y cereza", "Azucar, agua, zumo de limón con trozos de cereza.", "/images/bebida2.jpg", 10_000, 1),
 				new OpcionBebida(3, "Malteada", "Leche de soja, almendras, deslactosada o entera, con helado de su elección, cubierta de chantilly, toppings y salsa de chocolota, mora o arequipe.", "/images/bebida3.jpg", 11_400, 1),
 				new OpcionBebida(4, "Limonada de la casa", "Azucar, agua, limones, hielo, leche condensada y hojas de menta ", "/images/bebida4.jpg", 10_000, 1),
 				new OpcionBebida(5, "Soda", "Cocacola fria o al clima para acompañar sus platos", "/images/bebida5.jpg", 5_500, 1)

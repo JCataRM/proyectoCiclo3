@@ -1,7 +1,7 @@
 package co.utp.misiontic.proyecto.service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -23,5 +23,15 @@ public class EntradaServicio {
     public Optional<OpcionEntrada> obtenerEntrada(Integer id){
         return entradaRepositorio.findById(id);
     }
+
+    public Boolean validarCantidadEntradas(List<OpcionEntrada> entradas){
+        var respuesta = entradas.stream().map(m -> m.getCantidad()).collect(Collectors.toList());
+        
+        if(respuesta.stream().reduce(0, (a, b) -> a + b) >= 5){
+            return true;
+        }
+        return false;
+    }
+
 
 }

@@ -25,6 +25,6 @@ public class OpcionPlatoFuerte implements Serializable{
 
     @Override
     public String toString() {
-        return  nombre + ". Cantidad: " + cantidad;
+        return  nombre + " -> cantidad: " + cantidad + ". ";
     }
 }

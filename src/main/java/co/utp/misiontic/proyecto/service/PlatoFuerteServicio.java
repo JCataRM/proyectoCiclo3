@@ -2,6 +2,7 @@ package co.utp.misiontic.proyecto.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -22,5 +23,14 @@ public class PlatoFuerteServicio {
 
     public Optional<OpcionPlatoFuerte> obtenerPlatoFuerte(Integer id){
         return platoFuerteRepositorio.findById(id);
+    }
+
+    public Boolean validarCantidadPlatos(List<OpcionPlatoFuerte> platos){
+        var respuesta = platos.stream().map(m -> m.getCantidad()).collect(Collectors.toList());
+        
+        if(respuesta.stream().reduce(0, (a, b) -> a + b) >= 5){
+            return true;
+        }
+        return false;
     }
 }

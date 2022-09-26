@@ -1,11 +1,13 @@
 package co.utp.misiontic.proyecto.controller;
 
 import java.time.LocalDate;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 import co.utp.misiontic.proyecto.model.entity.*;
 import co.utp.misiontic.proyecto.service.*;
@@ -20,6 +22,10 @@ public class controlador {
     private final PedidoServicio pedidoServicio;
     private final UsuarioServicio usuarioServicio;
     private Pedido pedidoActual;
+    private List<OpcionEntrada> entradasBd;
+    private List<OpcionPlatoFuerte> platosBd;
+    private List<OpcionPostre> postresBd;
+    private List<OpcionBebida> bebidasBd;
 
     public controlador(EntradaServicio entradaServicio, BebidaServicio bebidaServicio, PostreServicio postreServicio,
             PlatoFuerteServicio platoFuerteServicio, UsuarioServicio usuarioServicio, PedidoServicio pedidoServicio
@@ -30,7 +36,12 @@ public class controlador {
         this.platoFuerteServicio = platoFuerteServicio;
         this.pedidoServicio = pedidoServicio;
         this.usuarioServicio = usuarioServicio;
+        
         this.pedidoActual = new Pedido();
+        this.entradasBd = new ArrayList<>();
+        this.platosBd = new ArrayList<>();
+        this.postresBd = new ArrayList<>();
+        this.bebidasBd= new ArrayList<>();
     }
     
 //------------------------------------Conexión de páginas web--------------------------------------------------------------
@@ -192,6 +203,14 @@ public class controlador {
         //Se obtiene la lista de entradas que seleccionó el usuario y la entrada que entra como parámetro
         var entradas = this.pedidoActual.getEntradas();
         var entrada = this.entradaServicio.obtenerEntrada(id);
+
+        //Se valida la restricción de cantidad máxima de entradas
+        if(entradaServicio.validarCantidadEntradas(entradas)){
+            modelo.addAttribute("mensajeLimite", "No puede seleccionar más de cinco entradas en un pedido.");
+            
+            menuEntradas(modelo);
+            return "entradas";
+        }
         
         //Se valida si existe un producto con ese id.
         if (!entrada.isEmpty()) {
@@ -202,16 +221,18 @@ public class controlador {
             //Si el producto NO está, se adiciona a la lista.
             if (entradaLista.isEmpty()) {
                     entradas.add(entrada.get());
+                    entradasBd.add(entrada.get());
                     modelo.addAttribute("mensaje", "La entrada '" + entrada.get().getNombre() + "' se agregó exitosamente al carrito.");
                 }
             //Si el producto está en la lista, se le adiciona una cantidad.
             else{
                 agregarEntrada(id, modelo);
+
             }
         } else{
             modelo.addAttribute("mensaje", "No existe un producto con esa referencia. Por favor intenta nuevamente");
         }
-                
+        
         menuEntradas(modelo);
         return "entradas";
     } 
@@ -221,6 +242,14 @@ public class controlador {
         //Se obtiene la lista de platos que seleccionó el usuario y el plato que entra como parámetro
         var platos = this.pedidoActual.getPlatosFuertes();
         var plato = this.platoFuerteServicio.obtenerPlatoFuerte(id);
+
+        //Se valida la restricción de cantidad máxima de platos
+        if(platoFuerteServicio.validarCantidadPlatos(platos)){
+            modelo.addAttribute("mensajeLimite", "No puede seleccionar más de cinco platos fuertes en un pedido.");
+            
+            menuPlatosFuertes(modelo);
+            return "platos_fuertes";
+        }
         
         //Se valida si existe un producto con ese id.
         if (!plato.isEmpty()) {
@@ -231,6 +260,7 @@ public class controlador {
             //Si el producto NO está, se adiciona a la lista.
             if (platoLista.isEmpty()) {
                     platos.add(plato.get());
+                    platosBd.add(plato.get());
                     modelo.addAttribute("mensaje", "El plato fuerte '" + plato.get().getNombre() + "' se agregó exitosamente al carrito.");
                 }
             //Si el producto está en la lista, se le adiciona una cantidad.
@@ -250,6 +280,14 @@ public class controlador {
         //Se obtiene la lista de postres que seleccionó el usuario y el postre que entra como parámetro
         var postres = this.pedidoActual.getPostres();
         var postre = this.postreServicio.obtenerPostre(id);
+
+        //Se valida la restricción de cantidad máxima de postres
+        if(postreServicio.validarCantidadPostres(postres)){
+            modelo.addAttribute("mensajeLimite", "No puede seleccionar más de cinco postres en un pedido.");
+            
+            menuPostres(modelo);
+            return "postres";
+        }
         
         //Se valida si existe un producto con ese id.
         if (!postre.isEmpty()) {
@@ -260,6 +298,7 @@ public class controlador {
             //Si el producto NO está, se adiciona a la lista.
             if (postreLista.isEmpty()) {
                     postres.add(postre.get());
+                    postresBd.add(postre.get());
                     modelo.addAttribute("mensaje", "El postre '" + postre.get().getNombre() + "' se agregó exitosamente al carrito.");
                 }
             //Si el producto está en la lista, se le adiciona una cantidad.
@@ -279,6 +318,14 @@ public class controlador {
         //Se obtiene la lista de bebidas que seleccionó el usuario y la bebida que entra como parámetro
         var bebidas = this.pedidoActual.getBebidas();
         var bebida = this.bebidaServicio.obtenerBebida(id);
+
+        //Se valida la restricción de cantidad máxima de bebidas
+        if(bebidaServicio.validarCantidadBebidas(bebidas)){
+            modelo.addAttribute("mensajeLimite", "No puede seleccionar más de cinco bebidas en un pedido.");
+            
+            menuBebidas(modelo);
+            return "bebidas";
+        }
         
         //Se valida si existe un producto con ese id.
         if (!bebida.isEmpty()) {
@@ -288,7 +335,8 @@ public class controlador {
 
             //Si el producto NO está, se adiciona a la lista.
             if (bebidaLista.isEmpty()) {
-                bebidas.add(bebida.get());
+                    bebidas.add(bebida.get());
+                    bebidasBd.add(bebida.get());
                     modelo.addAttribute("mensaje", "La bebida '" + bebida.get().getNombre() + "' se agregó exitosamente al carrito.");
                 } 
             //Si el producto está en la lista, se le adiciona una cantidad.
@@ -354,63 +402,6 @@ public class controlador {
         menuBebidas(modelo);
         return "bebidas";
     }
-//------------------------------------Carrito favoritos--------------------------------------------------------------------
-    
-    @GetMapping("/favoritos_entradas/{id}")
-    public String agregarFavoritosEntradaAlCarrito(@PathVariable("id") Integer id,  Model modelo){
-        
-        var entrada = this.entradaServicio.obtenerEntrada(id);
-        if (!entrada.isEmpty()) {
-            var entradas = this.pedidoActual.getEntradas();
-            entradas.add(entrada.get());
-            modelo.addAttribute("mensaje", "La entrada '" + entrada.get().getNombre() + "' se agregó exitosamente al carrito. Aquí puedes ver otras opciones de entrada.");
-        } 
-        menuEntradas(modelo);
-        return "entradas";
-    } 
-
-    @GetMapping("/favoritos_platos_fuertes/{id}")
-    public String agregarFavoritosPlatoAlCarrito(@PathVariable("id") Integer id,  Model modelo){
-        
-        var plato = this.platoFuerteServicio.obtenerPlatoFuerte(id);
-        if (!plato.isEmpty()) {
-            var platos = this.pedidoActual.getPlatosFuertes();
-            platos.add(plato.get());
-            modelo.addAttribute("mensaje", "El plato fuerte '"+ plato.get().getNombre() + "' se agregó exitosamente al carrito. Aquí puedes ver otras opciones de plato fuerte.");
-        } 
-        
-        menuPlatosFuertes(modelo);
-        return "platos_fuertes";
-    }   
-
-    @GetMapping("/favoritos_postres/{id}")
-    public String agregarFavoritosPostreAlCarrito(@PathVariable("id") Integer id,  Model modelo){
-        
-        var postre = this.postreServicio.obtenerPostre(id);
-        if (!postre.isEmpty()) {
-            var postres = this.pedidoActual.getPostres();
-            postres.add(postre.get());
-            modelo.addAttribute("mensaje", "El postre '" + postre.get().getNombre() + "' se agregó exitosamente al carrito. Aquí puedes ver otras opciones de postre.");
-        } 
-        
-        menuPostres(modelo);
-        return "postres";
-    }
-
-    @GetMapping("/favoritos_bebidas/{id}")
-    public String agregarFavoritosBebidaAlCarrito(@PathVariable("id") Integer id,  Model modelo){
-        
-        var bebida = this.bebidaServicio.obtenerBebida(id);
-        if (!bebida.isEmpty()) {
-            var bebidas = this.pedidoActual.getBebidas();
-            bebidas.add(bebida.get());
-            modelo.addAttribute("mensaje", "La bebida '" + bebida.get().getNombre() + "' se agregó exitosamente al carrito. Aquí puedes ver otras opciones de bebida.");
-        } 
-        
-        menuBebidas(modelo);
-        return "bebidas";
-    }
-
 
 //------------------------------------Gestión de pedido en el carrito------------------------------------------------------
     
@@ -471,8 +462,8 @@ public class controlador {
             this.pedidoActual.setHora_reserva(hora);
 
             //Se guarda el pedido en la base de datos
-            pedidoServicio.guardarPedido(this.pedidoActual);
-            modelo.addAttribute("mensajeOk", "El pedido se realizó exitosamente.");
+            pedidoServicio.guardarPedido(this.pedidoActual, this.entradasBd, this.platosBd, this.postresBd, this.bebidasBd);
+            modelo.addAttribute("mensajeOk", "El pedido se realizó exitosamente. Gracias por escogernos!");
 
             //Se restablece el pedido
             var usuario = this.pedidoActual.getUsuario();
@@ -487,14 +478,25 @@ public class controlador {
     public String agregarEntrada(@PathVariable("id") Integer id, Model modelo){
 
         var entradas = this.pedidoActual.getEntradas();
+
+        //Se valida la restricción de cantidad máxima de entradas
+        if(entradaServicio.validarCantidadEntradas(entradas)){
+            modelo.addAttribute("mensajeLimite", "No puede seleccionar más de cinco entradas en un pedido.");
+            
+            menuEntradas(modelo);
+            return "entradas";
+        }
+
         var entrada = entradas.stream().filter(m -> m.getId() == id).findFirst().get();
         var posicion = entradas.indexOf(entrada);
         var cantidadNueva = entrada.getCantidad() + 1;
         
         entrada.setCantidad(cantidadNueva);
         entradas.set(posicion, entrada);
+        entradasBd.add(entrada);
         
         modelo.addAttribute("mensaje", "La entrada '" + entrada.getNombre() + "' se le adicionó una unidad. Aquí puedes ver otras opciones de entrada.");
+        
         menuEntradas(modelo);
         return "entradas";
     }
@@ -503,14 +505,25 @@ public class controlador {
     public String agregarPlato(@PathVariable("id") Integer id, Model modelo){
 
         var platos = this.pedidoActual.getPlatosFuertes();
+
+        //Se valida la restricción de cantidad máxima de platos
+        if(platoFuerteServicio.validarCantidadPlatos(platos)){
+            modelo.addAttribute("mensajeLimite", "No puede seleccionar más de cinco platos fuertes en un pedido.");
+            
+            menuPlatosFuertes(modelo);
+            return "platos_fuertes";
+        }
+
         var plato = platos.stream().filter(m -> m.getId() == id).findFirst().get();
         var posicion = platos.indexOf(plato);
         var cantidadNueva = plato.getCantidad() + 1;
 
         plato.setCantidad(cantidadNueva);
         platos.set(posicion, plato);
+        platosBd.add(plato);
         
         modelo.addAttribute("mensaje", "El plato fuerte '" + plato.getNombre() + "' se le adicionó una unidad. Aquí puedes ver otras opciones de plato fuerte.");
+        
         menuPlatosFuertes(modelo);
         return "platos_fuertes";
     }
@@ -519,12 +532,22 @@ public class controlador {
     public String agregarPostre(@PathVariable("id") Integer id, Model modelo){
 
         var postres = this.pedidoActual.getPostres();
+
+        //Se valida la restricción de cantidad máxima de postres
+        if(postreServicio.validarCantidadPostres(postres)){
+            modelo.addAttribute("mensajeLimite", "No puede seleccionar más de cinco postres en un pedido.");
+            
+            menuPostres(modelo);
+            return "postres";
+        }
+
         var postre = postres.stream().filter(m -> m.getId() == id).findFirst().get();
         var posicion = postres.indexOf(postre);
         var cantidadNueva = postre.getCantidad() + 1;
 
         postre.setCantidad(cantidadNueva);
         postres.set(posicion, postre);
+        postresBd.add(postre);
         
         modelo.addAttribute("mensaje", "El postre '" + postre.getNombre() + "' se le adicionó una unidad. Aquí puedes ver otras opciones de postre.");
         menuPostres(modelo);
@@ -535,12 +558,22 @@ public class controlador {
     public String agregarBebida(@PathVariable("id") Integer id, Model modelo){
 
         var bebidas = this.pedidoActual.getBebidas();
+
+        //Se valida la restricción de cantidad máxima de bebidas
+        if(bebidaServicio.validarCantidadBebidas(bebidas)){
+            modelo.addAttribute("mensajeLimite", "No puede seleccionar más de cinco bebidas en un pedido.");
+            
+            menuBebidas(modelo);
+            return "bebidas";
+        }
+        
         var bebida = bebidas.stream().filter(m -> m.getId() == id).findFirst().get();
         var posicion = bebidas.indexOf(bebida);
         var cantidadNueva = bebida.getCantidad() + 1;
 
         bebida.setCantidad(cantidadNueva);
         bebidas.set(posicion, bebida);
+        bebidasBd.add(bebida);
         
         modelo.addAttribute("mensaje", "La bebida '" + bebida.getNombre() + "' se le adicionó una unidad. Aquí puedes ver otras opciones de bebida.");
         menuBebidas(modelo);
