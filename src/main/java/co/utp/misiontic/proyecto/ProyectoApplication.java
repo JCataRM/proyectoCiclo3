@@ -30,10 +30,10 @@ public class ProyectoApplication {
 
 		@Override
 		public void run(String... args) throws Exception {
-			cargarEntradas();
-			cargarPlatos();
-			cargarPostres();
-			cargarBebidas();
+			//cargarEntradas();
+			//cargarPlatos();
+			//cargarPostres();
+			//cargarBebidas();
 			
 		}
 
