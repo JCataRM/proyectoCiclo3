@@ -117,8 +117,8 @@ public class PedidoServicio {
                 plato.setCantidad(Collections.frequency(platos, plato));
             }
 
-            var respuesta = new ArrayList<>(new HashSet<>(entradas));
-            pedido.setEntradas(respuesta);
+            var respuesta = new ArrayList<>(new HashSet<>(platos));
+            pedido.setPlatosFuertes(respuesta);
         } 
         //Organizar postres
         var postres = pedido.getPostres();
