@@ -59,7 +59,4 @@ public class Pedido implements Serializable{
         this.postres = new ArrayList<>();
         this.bebidas = new ArrayList<>();
     }
-
-    
-
 }
