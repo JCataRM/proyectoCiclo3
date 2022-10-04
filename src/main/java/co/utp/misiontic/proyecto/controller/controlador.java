@@ -117,7 +117,7 @@ public class controlador {
 
     @GetMapping("/form_registration")
     public String formularioRegistro(){
-        return "/form_registration";
+        return "form_registration";
     }
 
     
